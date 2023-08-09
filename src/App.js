@@ -5,7 +5,7 @@ function App() {
     <div className="App">
       <div className="outer-box">
         <div className="next-text">
-          Next
+          NEXT
         </div>
       </div>
     </div>
