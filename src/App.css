@@ -5,26 +5,46 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 100px;
+  padding-top: 50px;
 }
+
+.microphone {
+  background-image: url("./images/microphone.png");
+  height: 100px;
+  width: 100%;
+  padding: 10px;
+  background-repeat: no-repeat; /* Added this line to prevent repetition */
+  background-size: contain; /* Adjusts the image to fit within the div */
+  background-position: center; /* Centers the image in the div */
+}
+
+.app-description {
+  color: #fff; /* or any color you prefer */
+  margin-bottom: 20px; /* space between the description and the NEXT text */
+  text-align: center; /* centers the text */
+  font-family: 'Arial', sans-serif; /* or any other font family you prefer */
+  font-size: 24px; /* adjust size as needed */
+}
+
 
 .next-text {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #febba9;
-  font-size: 50px;
+  color: white;
+  font-size: 60px;
   font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif;
-  border: 4px solid #ffffe0;
-  width: 175px;
-  height: 75px;
-  text-shadow: 4px 0px 8px #febba9, -4px 0px 8px #febba9;
-  box-shadow: 0 0 15px 0.1px white, inset 0px 0px 15px 0.1px white;
+  font-weight: 100;
+  border: 4px solid white;
+  width: 210px;
+  height: 90px;
+  text-shadow: 4px 0px 8px #fb2a7f, -4px 0px 8px #fb2a7f;
+  box-shadow: 0 0 15px 0.1px #b40bd6, inset 0px 0px 15px 0.1px #b40bd6;
   border-radius: 10px;
 }
 
 .outer-box {
-  width: 70%;
+  width: 1100px;
   height: 500px;
   border: 4px solid white;
   box-shadow: 0 0 20px 0.01px white, inset 0px 0px 20px 0.1px white;
@@ -32,4 +52,53 @@
   display: flex;
   justify-content: center;
   margin-top: 75px;
+}
+
+.descriptions {
+  width: 100%;
+  justify-content: space-between;  /* Distributes space evenly between the boxes */
+  height: 250px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 75px;
+  flex-wrap: wrap;
+  margin: 75px;
+}
+
+.description {
+  width: 300px;
+  height: 200px; 
+  border: 4px solid white; 
+  margin: 45px;
+  border-radius: 10px; 
+  box-shadow: 0 0 20px 0.01px white, inset 0px 0px 20px 0.1px white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.description-1 {
+  box-shadow: 0 0 20px 0.01px #ffa3a6, inset 0px 0px 20px 0.1px #ffa3a6;
+}
+
+.description-2 {
+  box-shadow: 0 0 20px 0.01px #8fd3fe, inset 0px 0px 20px 0.1px #8fd3fe;
+}
+
+.description-3 {
+  box-shadow: 0 0 20px 0.01px #FFD580, inset 0px 0px 20px 0.1px #FFD580;
+}
+
+.description-5 {
+  box-shadow: 0 0 20px 0.01px #9fd4a3, inset 0px 0px 20px 0.1px #9fd4a3;
+}
+
+.description-4 {
+  box-shadow: 0 0 20px 0.01px #FFF59E, inset 0px 0px 20px 0.1px #FFF59E;
+}
+
+.description-6 {
+  box-shadow: 0 0 20px 0.01px #CBC3E3, inset 0px 0px 20px 0.1px #CBC3E3;
 }
