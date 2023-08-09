@@ -1,20 +1,11 @@
 .App {
   background-image: url("./images/nextWallpaper.png");
-  height: 1000px;
+  height: 1500px;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.outer-box {
-  width: 70%;
-  height: 50%;
-  border: 4px solid white;
-  box-shadow: 0 0 20px 0.01px white, inset 0px 0px 20px 0.1px white;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding-top: 100px;
 }
 
 .next-text {
@@ -30,4 +21,15 @@
   text-shadow: 4px 0px 8px #febba9, -4px 0px 8px #febba9;
   box-shadow: 0 0 15px 0.1px white, inset 0px 0px 15px 0.1px white;
   border-radius: 10px;
+}
+
+.outer-box {
+  width: 70%;
+  height: 500px;
+  border: 4px solid white;
+  box-shadow: 0 0 20px 0.01px white, inset 0px 0px 20px 0.1px white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
 }
