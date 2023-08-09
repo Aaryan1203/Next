@@ -13,31 +13,30 @@
   height: 100px;
   width: 100%;
   padding: 10px;
-  background-repeat: no-repeat; /* Added this line to prevent repetition */
-  background-size: contain; /* Adjusts the image to fit within the div */
-  background-position: center; /* Centers the image in the div */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 .app-description {
-  color: #fff; /* or any color you prefer */
-  margin-bottom: 20px; /* space between the description and the NEXT text */
-  text-align: center; /* centers the text */
-  font-family: 'Arial', sans-serif; /* or any other font family you prefer */
-  font-size: 24px; /* adjust size as needed */
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  font-size: 24px;
 }
-
 
 .next-text {
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 60px;
-  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Marker Felt', sans-serif;
+  font-size: 70px;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
   font-weight: 100;
   border: 4px solid white;
-  width: 210px;
-  height: 90px;
+  width: 260px;
+  height: 110px;
   text-shadow: 4px 0px 8px #fb2a7f, -4px 0px 8px #fb2a7f;
   box-shadow: 0 0 15px 0.1px #b40bd6, inset 0px 0px 15px 0.1px #b40bd6;
   border-radius: 10px;
@@ -47,7 +46,7 @@
   width: 1100px;
   height: 500px;
   border: 4px solid white;
-  box-shadow: 0 0 20px 0.01px white, inset 0px 0px 20px 0.1px white;
+  box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -56,7 +55,7 @@
 
 .descriptions {
   width: 100%;
-  justify-content: space-between;  /* Distributes space evenly between the boxes */
+  justify-content: space-between; /* Distributes space evenly between the boxes */
   height: 250px;
   border-radius: 10px;
   display: flex;
@@ -68,10 +67,10 @@
 
 .description {
   width: 300px;
-  height: 200px; 
-  border: 4px solid white; 
+  height: 200px;
+  border: 4px solid white;
   margin: 45px;
-  border-radius: 10px; 
+  border-radius: 10px;
   box-shadow: 0 0 20px 0.01px white, inset 0px 0px 20px 0.1px white;
   display: flex;
   align-items: center;
@@ -88,7 +87,7 @@
 }
 
 .description-3 {
-  box-shadow: 0 0 20px 0.01px #FFD580, inset 0px 0px 20px 0.1px #FFD580;
+  box-shadow: 0 0 20px 0.01px #ffd580, inset 0px 0px 20px 0.1px #ffd580;
 }
 
 .description-5 {
@@ -96,9 +95,9 @@
 }
 
 .description-4 {
-  box-shadow: 0 0 20px 0.01px #FFF59E, inset 0px 0px 20px 0.1px #FFF59E;
+  box-shadow: 0 0 20px 0.01px #fff59e, inset 0px 0px 20px 0.1px #fff59e;
 }
 
 .description-6 {
-  box-shadow: 0 0 20px 0.01px #CBC3E3, inset 0px 0px 20px 0.1px #CBC3E3;
+  box-shadow: 0 0 20px 0.01px #b19cd9, inset 0px 0px 20px 0.1px #b19cd9;
 }
