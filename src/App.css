@@ -18,10 +18,20 @@
   background-position: center;
 }
 
+.app-slogan {
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+  background-position: center;
+  font-family: "Arial", sans-serif;
+  font-size: 72px;
+}
+
 .app-description {
   color: #fff;
   margin-bottom: 20px;
   text-align: center;
+  background-position: center;
   font-family: "Arial", sans-serif;
   font-size: 24px;
 }
