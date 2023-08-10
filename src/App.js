@@ -5,8 +5,8 @@ function App() {
     <div className="App">
       <div className="microphone"></div>
       <div className="next-text">NEXT</div>
+      <div className="app-slogan">Record. Recommend. Realize.</div>
       <div className="outer-box">
-        <div className="app-slogan">Record. Recommend. Realize.</div>
         <div className="app-description">
           Every monumental project starts with a simple idea. While sparking
           that initial concept can be elusive, our web application, enhanced by

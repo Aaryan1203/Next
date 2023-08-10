@@ -1,11 +1,10 @@
 .App {
   background-image: url("./images/nextWallpaper.png");
-  height: 2000px;
+  height: 1700px;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 50px;
 }
 
 .microphone {
@@ -24,7 +23,6 @@
   text-align: center;
   font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
   font-size: 60px;
-  margin-top: 20px;
 }
 
 .app-description {
@@ -32,7 +30,7 @@
   margin-bottom: 20px;
   text-align: center;
   background-position: center;
-  font-family: "Arial", sans-serif;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
   font-size: 24px;
   width: 700px;
 }
@@ -60,7 +58,6 @@
   box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
   border-radius: 10px;
   display: flex;
-  margin-top: 75px;
   flex-direction: column;
 }
 
@@ -94,15 +91,18 @@
 .description-title {
   font-weight: bold;
   position: absolute;
-  margin-bottom: 10px;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
+  font-size: 20px;
 }
 
 .description-content {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  padding-top: 40px;
+  padding-top: 35px;
   text-align: center;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
+  width: 300px;
 }
 
 .description-1 {
