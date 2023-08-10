@@ -8,70 +8,69 @@ function App() {
       <div className="outer-box">
         <h1 className="app-slogan">
           <i>Record. Recommend. Realize.</i>
-          </h1>
-          <br></br>
-          <h2 className="app-description">
-          Behind every great project is a simple idea. 
-          Unfortunately, sometimes ideation is one of 
-          the most difficult steps in the development 
-          of a project; that extra spark is needed to 
-          turn on that light bulb. This is where our 
-          technology comes into play: have our web 
-          application join in on the conversation and 
-          give you instant feedback on your team’s ideas! 
-          With the help of ChatGPT and voice-to-text 
-          technology, we can help you figure out what to
-           do next to successfully bring your project to life!</h2>
+        </h1>
+        <br></br>
+        <h2 className="app-description">
+          Every monumental project starts with a simple idea. While sparking
+          that initial concept can be elusive, our web application, enhanced by
+          ChatGPT and voice-to-text technology, is here to help. It seamlessly
+          integrates into your brainstorming sessions, providing real-time
+          feedback. Let us illuminate the path forward, helping bring your
+          project to life!
+        </h2>
       </div>
       <div className="descriptions">
         <div className="description description-1">
-          <b>Free Recorder and Suggester:</b> 
-          <br></br> Our web application 
-          doesn’t require purchases or downloads in order 
-          to record your speech, summarize your ideas, and 
-          recommend you on how to move forward with your ideas.
+          <div className="description-title">Free Recorder and Suggester</div>
+          <div className="description-content">
+            Next allows you to record speech, summarize ideas, and receive
+            recommendations for progressing with your concepts, all without any
+            purchases or downloads
+          </div>
         </div>
         <div className="description description-2">
-          <b>Privacy Guaranteed:</b> 
-          <br></br> We ensure that your recordings 
-          are never kept by us. They are simply processed by 
-          ChatGPT technology as it summarizes your thoughts 
-          and offers suggestions. Furthermore, there are no 
-          accounts for content to be linked to; each session 
-          using our web application is temporary.
+          <div className="description-title">Privacy Guaranteed</div>
+          <div className="description-content">
+            Your recordings remain confidential with us. ChatGPT swiftly
+            processes them to distill your thoughts and provide insights.
+            Additionally, our sessions are ephemeral with no content linkage to
+            accounts
+          </div>
         </div>
         <div className="description description-3">
-          <b>Downloadable Content:</b> 
-          <br></br> Inspiration can come and go at 
-          any instant. Because of this, we don’t require any 
-          accounts to be made, skipping the login process 
-          altogether and still allowing you to save the summary 
-          and suggestions we give you by downloading a txt file 
-          to your local device.
+          <div className="description-title">Downloadable Content</div>
+          <div className="description-content">
+            Inspiration can come and go at any instant. With this in mind, we've
+            eliminated the need for account creation. Dive right in and, at your
+            convenience, download summaries and suggestions directly to your
+            device
+          </div>
         </div>
         <div className="description description-4">
-          <b>Brainstorm Aloud:</b> 
-          <br></br> Sometimes the best or even only way 
-          to figure out what you want for your project is to say 
-          what comes to mind out loud! If your teammates aren’t 
-          available to talk right now, or you’re working by yourself, 
-          you can use our technology to bounce ideas around and have
-          that ah-ha moment!
+          <div className="description-title">Brainstorm Aloud</div>
+          <div className="description-content">
+            At times, voicing your thoughts aloud is the key to clarity for your
+            project. Whether your team is unavailable or you're brainstorming
+            solo, our technology is here to help you navigate those 'aha!'
+            moments
+          </div>
         </div>
         <div className="description description-5">
-          <b>Take Notes Automatically:</b>
-          <br></br> When you’re having an ideation 
-          session with your teammates, the last thing you want to do 
-          is take notes and lose focus on the conversation itself. 
-          Instead, let us be your note taker and give you some insight too!
+          <div className="description-title">Take Notes Automatically</div>
+          <div className="description-content">
+            During brainstorming sessions, staying immersed in the conversation
+            is crucial. We`ll handle the note-taking, allowing you to engage
+            fully while benefiting from our insights
+          </div>
         </div>
         <div className="description description-6">
-          <b>Accessible:</b> 
-          <br></br> We prioritize accessibility and inclusion and 
-          want to give everyone the chance to use the exciting ChatGPT 
-          technology. With our web application, now those who cannot 
-          type out their thoughts on the ChatGPT platform can speak 
-          them instead!
+          <div className="description-title">Accessible</div>
+          <div className="description-content">
+            Our commitment to accessibility and inclusion drives us to make the
+            innovative ChatGPT technology available to all. With our web
+            application, even if you're unable to type, you can voice your
+            thoughts effortlessly
+          </div>
         </div>
       </div>
     </div>
