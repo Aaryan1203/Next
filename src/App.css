@@ -22,9 +22,9 @@
   color: #fff;
   margin-bottom: 20px;
   text-align: center;
-  background-position: center;
-  font-family: "Arial", sans-serif;
-  font-size: 72px;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
+  font-size: 60px;
+  margin-top: 20px;
 }
 
 .app-description {
@@ -34,6 +34,7 @@
   background-position: center;
   font-family: "Arial", sans-serif;
   font-size: 24px;
+  width: 600px;
 }
 
 .next-text {
@@ -59,8 +60,8 @@
   box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
   margin-top: 75px;
+  flex-direction: column;
 }
 
 .descriptions {
