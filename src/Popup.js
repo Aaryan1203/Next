@@ -18,7 +18,9 @@ function Popup ({ isOpen, onRequestClose }) {
                 integrates into your brainstorming sessions, providing real-time
                 feedback. Let us illuminate the path forward, helping bring your
                 project to life!
+                <div>
                 <button onClick={onRequestClose}>Close</button>
+                </div>
             </div>
         </ReactModal>
     );

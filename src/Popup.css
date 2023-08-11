@@ -22,3 +22,8 @@
 .popup-description {
     text-align: center;
 }
+
+.popup-description button:hover {
+    align-content: center;
+    background-color: beige;
+}
