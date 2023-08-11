@@ -1,12 +1,27 @@
+import React, { useState } from "react";
 import "./App.css";
+import Popup from "./Popup";
 
 function App() {
+
+  const [popupOpened, setPopupOpened] = useState(false);
+
+  const openPopup = () => {
+    setPopupOpened(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpened(false);
+  };
+  
   return (
     <div className="App">
       <div className="microphone"></div>
       <div className="next-text">NEXT</div>
       <div className="app-slogan">Record. Recommend. Realize.</div>
       <div className="outer-box">
+        <button onClick={openPopup}>Open Popup</button>
+        <Popup isOpen={popupOpened} onRequestClose={closePopup} />
         <div className="app-description">
           Every monumental project starts with a simple idea. While sparking
           that initial concept can be elusive, our web application, enhanced by
