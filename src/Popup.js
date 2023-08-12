@@ -23,7 +23,7 @@ function Popup ({ isOpen, onRequestClose }) {
                 Are you ready for what's <i><b>NEXT</b></i>?
                 </div>
                 <br></br>
-                <button onClick={onRequestClose}>Go!</button>
+                <button className="go-button" onClick={onRequestClose}>Go!</button>
             </div>
         </ReactModal>
     );

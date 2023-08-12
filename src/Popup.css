@@ -23,12 +23,26 @@
     text-align: center;
 }
 
-.popup-description button {
-    background-color: white;
-    border-color: beige;
-}
-
 .popup-description button:hover {
     align-content: center;
     background-color: beige;
+}
+
+@keyframes flash {
+    0% {
+        color: black;
+    }
+
+    50% {
+        color: transparent;
+    }
+
+    100% {
+        color: black;
+    }
+}
+.go-button {
+    background-color: white;
+    border-color: beige;
+    animation: flash 1.5s infinite;
 }
