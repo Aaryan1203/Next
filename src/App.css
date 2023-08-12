@@ -7,6 +7,21 @@
   flex-direction: column;
 }
 
+.App button {
+  color: white;
+  background-color: transparent;
+  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
+  font-size: 24px;
+  height: 50px;
+  width: 50px;
+  border: 4px solid white;
+  align-self: flex-end;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-right: 20px;
+  padding-bottom: 5px;
+}
+
 .microphone {
   background-image: url("./images/microphone.png");
   height: 100px;
@@ -33,7 +48,7 @@
   font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
   font-size: 24px;
   width: 700px;
-}
+} /*don't need*/
 
 .next-text {
   display: flex;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactModal from 'react-modal';
 import './Popup.css';
 
@@ -19,8 +19,11 @@ function Popup ({ isOpen, onRequestClose }) {
                 feedback. Let us illuminate the path forward, helping bring your
                 project to life!
                 <div>
-                <button onClick={onRequestClose}>Close</button>
+                <br></br>
+                Are you ready for what's <i><b>NEXT</b></i>?
                 </div>
+                <br></br>
+                <button onClick={onRequestClose}>Go!</button>
             </div>
         </ReactModal>
     );

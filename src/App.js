@@ -4,7 +4,7 @@ import Popup from "./Popup";
 
 function App() {
 
-  const [popupOpened, setPopupOpened] = useState(false);
+  const [popupOpened, setPopupOpened] = useState(true);
 
   const openPopup = () => {
     setPopupOpened(true);
@@ -16,12 +16,12 @@ function App() {
 
   return (
     <div className="App">
+      <button onClick={openPopup}><b>?</b></button>
+        <Popup isOpen={popupOpened} onRequestClose={closePopup} />
       <div className="microphone"></div>
       <div className="next-text">NEXT</div>
       <div className="app-slogan">Record. Recommend. Realize.</div>
       <div className="outer-box">
-        <button onClick={openPopup}>Open Popup</button>
-        <Popup isOpen={popupOpened} onRequestClose={closePopup} />
         <div className="app-description">
         </div>
       </div>
