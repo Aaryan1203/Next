@@ -40,16 +40,6 @@
   font-size: 60px;
 }
 
-.app-description {
-  color: #fff;
-  margin-bottom: 20px;
-  text-align: center;
-  background-position: center;
-  font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
-  font-size: 24px;
-  width: 700px;
-} /*don't need*/
-
 .next-text {
   display: flex;
   align-items: center;
@@ -74,6 +64,16 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.textbox-text {
+  width: 1059px;
+  height: 409px;
+  resize: vertical;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 20px;
 }
 
 .descriptions {

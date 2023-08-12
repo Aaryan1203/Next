@@ -22,7 +22,8 @@ function App() {
       <div className="next-text">NEXT</div>
       <div className="app-slogan">Record. Recommend. Realize.</div>
       <div className="outer-box">
-        <div className="app-description">
+        <div className="scrollable-textbox">
+          <textarea className="textbox-text" placeholder="ChatGPT inputs"></textarea>
         </div>
       </div>
       <div className="descriptions">
