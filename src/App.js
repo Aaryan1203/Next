@@ -3,7 +3,6 @@ import "./App.css";
 import Popup from "./Popup";
 
 function App() {
-
   const [popupOpened, setPopupOpened] = useState(true);
 
   const openPopup = () => {
@@ -16,14 +15,19 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={openPopup}><b>?</b></button>
-        <Popup isOpen={popupOpened} onRequestClose={closePopup} />
+      <button onClick={openPopup}>
+        <b>?</b>
+      </button>
+      <Popup isOpen={popupOpened} onRequestClose={closePopup} />
       <div className="microphone"></div>
       <div className="next-text">NEXT</div>
       <div className="app-slogan">Record. Recommend. Realize.</div>
       <div className="outer-box">
         <div className="scrollable-textbox">
-          <textarea className="textbox-text" placeholder="ChatGPT inputs"></textarea>
+          <textarea
+            className="textbox-text"
+            placeholder="ChatGPT inputs"
+          ></textarea>
         </div>
       </div>
       <div className="descriptions">
