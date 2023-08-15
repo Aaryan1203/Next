@@ -1,5 +1,7 @@
+import React, { useState } from "react";
+
 async function getData({ prompt }) {
-  var systemRole = "";
+  var systemRole = "You are an assistant";
   try {
     const gptResponse = await fetch(
       "https://api.openai.com/v1/chat/completions",
@@ -30,3 +32,45 @@ async function getData({ prompt }) {
     throw error;
   }
 }
+
+function Chatbot() {
+  const [userInput, setUserInput] = useState("");
+  const [output, setOutput] = useState("");
+
+  const handleInputChange = (e) => {
+    setUserInput(e.target.value);
+    e.target.style.height = "auto";
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+  const handleSubmit = async () => {
+    try {
+      const response = await getData({
+        prompt: userInput,
+      });
+      setOutput(response);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    setUserInput("");
+  };
+
+  return (
+    <div className="chat-bot">
+      <div className="output">{output}</div>
+      <div className="input-container">
+        <textarea
+          type="text"
+          value={userInput}
+          onChange={handleInputChange}
+          placeholder="Type your question here..."
+          className="input-button"
+        />
+        <button onClick={handleSubmit} className="submit-button">
+          Submit
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Chatbot;

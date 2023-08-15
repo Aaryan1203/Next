@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Popup from "./Popup";
+import Chatbot from "./ChatBot";
 
 function App() {
   const [popupOpened, setPopupOpened] = useState(true);
@@ -15,19 +16,14 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={openPopup}>
-        <b>?</b>
-      </button>
+      <button onClick={openPopup} className="info-button">?</button>
       <Popup isOpen={popupOpened} onRequestClose={closePopup} />
       <div className="microphone"></div>
       <div className="next-text">NEXT</div>
       <div className="app-slogan">Record. Recommend. Realize.</div>
       <div className="outer-box">
         <div className="scrollable-textbox">
-          <textarea
-            className="textbox-text"
-            placeholder="ChatGPT inputs"
-          ></textarea>
+          <Chatbot />
         </div>
       </div>
       <div className="descriptions">
