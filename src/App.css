@@ -156,12 +156,16 @@
     color: white;
     font-size: 1em;
     padding: 20px;
+    font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
+
 }
 
 .input-container {
     display: flex;
     align-items: center;
     width: 940px;
+    font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
+
 }
 
 .input-button {
