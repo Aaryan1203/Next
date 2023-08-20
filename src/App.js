@@ -16,11 +16,13 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={openPopup} className="info-button">?</button>
+      <button onClick={openPopup} className="info-button">
+        ?
+      </button>
       <Popup isOpen={popupOpened} onRequestClose={closePopup} />
       <div className="microphone"></div>
       <div className="next-text">NEXT</div>
-      <div className="app-slogan">Record. Recommend. Realize.</div>
+      <div className="app-slogan">Ask. Answer. Ace.</div>
       <div className="outer-box">
         <div className="scrollable-textbox">
           <Chatbot />
@@ -30,53 +32,58 @@ function App() {
         <div className="description description-1">
           <div className="description-title">Free Recorder and Suggester</div>
           <div className="description-content">
-            Next allows you to record speech, summarize ideas, and receive
-            recommendations for progressing with your concepts, all without any
-            purchases or downloads
+            Our web application doesn't require purchases or downloads in order
+            to record your interview question response, commend the strong
+            points, and constructively suggest what you can think about saying
+            next time.
           </div>
         </div>
         <div className="description description-2">
           <div className="description-title">Privacy Guaranteed</div>
           <div className="description-content">
-            Your recordings remain confidential with us. ChatGPT swiftly
-            processes them to distill your thoughts and provide insights.
-            Additionally, our sessions are ephemeral with no content linkage to
-            accounts
+            We ensure that your recordings are never kept by us. They are simply
+            processed by ChatGPT technology as it gives feedback on how you
+            responded to an interview question. Furthermore, there are no
+            accounts for content to be linked to; each session using our web
+            application is temporary.
           </div>
         </div>
         <div className="description description-3">
           <div className="description-title">Downloadable Content</div>
           <div className="description-content">
-            Inspiration can come and go at any instant. With this in mind, we've
-            eliminated the need for account creation. Dive right in and, at your
-            convenience, download summaries and suggestions directly to your
-            device
+            Inspiration can come and go at any instant. Because of this, we
+            don't require any accounts to be made, skipping the login process
+            altogether and still allowing you to save the feedback we give you
+            by downloading a txt file to your local device.
           </div>
         </div>
         <div className="description description-4">
-          <div className="description-title">Brainstorm Aloud</div>
+          <div className="description-title">Practice Aloud</div>
           <div className="description-content">
-            At times, voicing your thoughts aloud is the key to clarity for your
-            project. Whether your team is unavailable or you're brainstorming
-            solo, our technology is here to help you navigate those 'aha!'
-            moments
+            Knowing common interview questions and their responses means nothing
+            if you can't confidently articulate the responses yourself! By
+            recording your answers to these questions in 3 minutes or less,
+            you'll learn how to adapt on the fly and smoothly deliver a response
+            as if you never blanked out at all!
           </div>
         </div>
         <div className="description description-5">
-          <div className="description-title">Take Notes Automatically</div>
+          <div className="description-title">Receive Feedback</div>
           <div className="description-content">
-            During brainstorming sessions, staying immersed in the conversation
-            is crucial. We`ll handle the note-taking, allowing you to engage
-            fully while benefiting from our insights
+            Don't be afraid to make mistakes; how else will you learn how to
+            embrace that little bit of interview anxiety and come out as a
+            strong candidate? Instead, say what comes to mind and let us help
+            you figure out what you should continue to say or what could say
+            instead when you encounter a similar question.
           </div>
         </div>
         <div className="description description-6">
           <div className="description-title">Accessible</div>
           <div className="description-content">
-            Our commitment to accessibility and inclusion drives us to make the
-            innovative ChatGPT technology available to all. With our web
-            application, even if you're unable to type, you can voice your
-            thoughts effortlessly
+            We prioritize accessibility and inclusion and want to give everyone
+            the chance to use the exciting ChatGPT technology. With our web
+            application, now those who cannot type out their thoughts on the
+            ChatGPT platform can speak them instead!
           </div>
         </div>
       </div>

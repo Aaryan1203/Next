@@ -36,7 +36,7 @@ async function getData({ prompt }) {
 function Chatbot() {
   const [userInput, setUserInput] = useState("");
   const [output, setOutput] = useState("");
-
+  console.log("api-key: " + process.env.REACT_APP_OPENAI_API_KEY);
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
     e.target.style.height = "auto";
