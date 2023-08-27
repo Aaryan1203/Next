@@ -41,49 +41,42 @@ function App() {
         <div className="description description-2">
           <div className="description-title">Privacy Guaranteed</div>
           <div className="description-content">
-            We ensure that your recordings are never kept by us. They are simply
-            processed by ChatGPT technology as it gives feedback on how you
-            responded to an interview question. Furthermore, there are no
-            accounts for content to be linked to; each session using our web
-            application is temporary.
+            We don't store your recordings. They're processed by ChatGPT for
+            feedback on interview responses. No accounts link content; each
+            session is temporary.
           </div>
         </div>
         <div className="description description-3">
           <div className="description-title">Downloadable Content</div>
           <div className="description-content">
-            Inspiration can come and go at any instant. Because of this, we
-            don't require any accounts to be made, skipping the login process
-            altogether and still allowing you to save the feedback we give you
-            by downloading a txt file to your local device.
+            Inspiration can strike unexpectedly. For this reason, we've
+            eliminated the need for account creation and logins. Instead, we
+            offer a seamless experience where you can easily download our
+            feedback to your device.
           </div>
         </div>
         <div className="description description-4">
           <div className="description-title">Practice Aloud</div>
           <div className="description-content">
-            Knowing common interview questions and their responses means nothing
-            if you can't confidently articulate the responses yourself! By
-            recording your answers to these questions in 3 minutes or less,
-            you'll learn how to adapt on the fly and smoothly deliver a response
-            as if you never blanked out at all!
+            Knowing interview questions is useless if you can't articulate
+            confidently! By recording answers in under 3 minutes, you'll master
+            adapting and delivering responses without hesitation.
           </div>
         </div>
         <div className="description description-5">
           <div className="description-title">Receive Feedback</div>
           <div className="description-content">
-            Don't be afraid to make mistakes; how else will you learn how to
-            embrace that little bit of interview anxiety and come out as a
-            strong candidate? Instead, say what comes to mind and let us help
-            you figure out what you should continue to say or what could say
-            instead when you encounter a similar question.
+            Don't fear mistakes; they teach you to handle interview anxiety and
+            stand out. Speak freely, and we'll guide you on what to keep or
+            adjust for future questions.
           </div>
         </div>
         <div className="description description-6">
           <div className="description-title">Accessible</div>
           <div className="description-content">
-            We prioritize accessibility and inclusion and want to give everyone
-            the chance to use the exciting ChatGPT technology. With our web
-            application, now those who cannot type out their thoughts on the
-            ChatGPT platform can speak them instead!
+            We value accessibility and inclusion, aiming to offer everyone the
+            ChatGPT experience. With our web app, those unable to type can now
+            speak their thoughts!
           </div>
         </div>
       </div>
