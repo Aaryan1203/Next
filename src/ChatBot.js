@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-async function getData({ prompt }) {
-  var systemRole = "You are an assistant";
+async function getData({ prompt, systemRole }) {
   try {
     const gptResponse = await fetch(
       "https://api.openai.com/v1/chat/completions",
@@ -33,7 +32,7 @@ async function getData({ prompt }) {
   }
 }
 
-function Chatbot() {
+function Chatbot({ systemRole }) {
   const [userInput, setUserInput] = useState("");
   const [output, setOutput] = useState("");
   console.log("api-key: " + process.env.REACT_APP_OPENAI_API_KEY);
@@ -46,6 +45,7 @@ function Chatbot() {
     try {
       const response = await getData({
         prompt: userInput,
+        systemRole: systemRole,
       });
       setOutput(response);
     } catch (error) {
