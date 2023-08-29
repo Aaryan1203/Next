@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from 'react';
 
 async function getData({ prompt, systemRole }) {
   try {
@@ -32,45 +32,29 @@ async function getData({ prompt, systemRole }) {
   }
 }
 
-function Chatbot({ systemRole }) {
-  const [userInput, setUserInput] = useState("");
+function useChatbot(finalUserInput, finalSystemRole) {
   const [output, setOutput] = useState("");
-  console.log("api-key: " + process.env.REACT_APP_OPENAI_API_KEY);
-  const handleInputChange = (e) => {
-    setUserInput(e.target.value);
-    e.target.style.height = "auto";
-    e.target.style.height = `${e.target.scrollHeight}px`;
-  };
-  const handleSubmit = async () => {
-    try {
-      const response = await getData({
-        prompt: userInput,
-        systemRole: systemRole,
-      });
-      setOutput(response);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-    setUserInput("");
-  };
+  const [isLoading, setLoading] = useState(false);
 
-  return (
-    <div className="chat-bot">
-      <div className="output">{output}</div>
-      <div className="input-container">
-        <textarea
-          type="text"
-          value={userInput}
-          onChange={handleInputChange}
-          placeholder="Type your question here..."
-          className="input-button"
-        />
-        <button onClick={handleSubmit} className="submit-button">
-          Submit
-        </button>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await getData({
+          prompt: finalUserInput,
+          systemRole: finalSystemRole
+        });
+        setOutput(response);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [finalUserInput, finalSystemRole]);
+
+  return { output, isLoading };
 }
 
-export default Chatbot;
+export default useChatbot;

@@ -1,6 +1,6 @@
 .App {
   background-image: url("./images/nextWallpaper.png");
-  height: 1700px;
+  height: 2700px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@
 }
 
 .outer-box {
-  width: 1100px;
+  width: 1210px;
   height: 500px;
   border: 4px solid white;
   box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
@@ -116,6 +116,70 @@
   width: 300px;
 }
 
+.welcome-text {
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  padding: 30px;
+  font-size: 2em;
+}
+
+.question-generation-inputs {
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  padding: 30px;
+  font-size: 2em;
+  flex-grow: 1;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.inputs {
+  margin-right: 10px;
+}
+
+.generate-button {
+  font-size: 1.5em;
+  color: white;
+  margin-right: 150px;
+  margin-bottom: 50px;
+  border: #8fd3fe solid 3px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: transparent;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.generate-button:hover {
+  background-color: purple !important;
+}
+
+.output1 {
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  padding: 30px;
+}
+
+.input-and-button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.question-generation-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.generate-button-wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .description-1 {
   box-shadow: 0 0 20px 0.01px #ffa3a6, inset 0px 0px 20px 0.1px #ffa3a6;
 }
@@ -138,43 +202,4 @@
 
 .description-6 {
   box-shadow: 0 0 20px 0.01px #b19cd9, inset 0px 0px 20px 0.1px #b19cd9;
-}
-
-.chat-bot {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.output {
-    width: 900px;
-    height: 200px;
-    margin-bottom: 20px; 
-    border: 4px solid white;
-    box-shadow: 0 0 15px 0.1px #b40bd6, inset 0px 0px 15px 0.1px #b40bd6;
-    margin-top: 40px;
-    color: white;
-    font-size: 1em;
-    padding: 20px;
-    font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
-
-}
-
-.input-container {
-    display: flex;
-    align-items: center;
-    width: 940px;
-    font-family: "Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif;
-
-}
-
-.input-button {
-    flex: 1;
-    resize: none;
-    height: 50px;
-}
-
-.submit-button {
-    margin-left: 10px;
-    font-size: 1em;
 }

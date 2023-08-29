@@ -1,10 +1,47 @@
 import React, { useState } from "react";
 import "./App.css";
 import Popup from "./Popup";
-import Chatbot from "./ChatBot";
+import useChatbot from "./ChatBot";
 
 function App() {
   const [popupOpened, setPopupOpened] = useState(true);
+  // const [userInput1, setUserInput1] = useState("");
+  // const [userInput2, setUserInput2] = useState("");
+
+  const [finalUserInput1, setFinalUserInput1] = useState("");
+  const [finalUserInput2, setFinalUserInput2] = useState("");
+  const [systemRole1, setSystemRole1] = useState("");
+  const [systemRole2, setSystemRole2] = useState("");
+  const [position, setPosition] = useState("");
+  const [types, setTypes] = useState("");
+  const [numQuestions, setNumQuestions] = useState("");
+
+  const { output: output1, isLoading: isLoading1 } = useChatbot(
+    finalUserInput1,
+    systemRole1
+  );
+  const { output: output2, isLoading: isLoading2 } = useChatbot(
+    finalUserInput2,
+    systemRole2
+  );
+
+  const handleGenerate = () => {
+    setFinalUserInput1(
+      `generate ${numQuestions} interview questions for a ${position} position focusing on ${types}`
+    );
+    setSystemRole1(
+      "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentances"
+    );
+  };
+
+  const handleInputChange = (setState) => (e) => {
+    setState(e.target.value);
+  };
+
+  // const handleSubmit2 = (newSystemRole) => {
+  //   setFinalUserInput2(userInput2);
+  //   setSystemRole2(newSystemRole);
+  // };
 
   const openPopup = () => {
     setPopupOpened(true);
@@ -24,8 +61,60 @@ function App() {
       <div className="next-text">NEXT</div>
       <div className="app-slogan">Ask. Answer. Ace.</div>
       <div className="outer-box">
-        <div className="scrollable-textbox">
-          <Chatbot />
+        <div className="welcome-text">
+          Hi! To help me help you with interview preparation, please let me know
+          what type of position you're interviewing for, the types of
+          questions/topics you want asked, and the number of questions you want
+          me to make for you to choose from!
+        </div>
+        <div className="input-and-button-wrapper">
+          <div className="question-generation-inputs">
+            <div className="input-row">
+              <div className="inputs">Position:</div>
+              <input
+                className="input-container"
+                type="text"
+                value={position}
+                onChange={handleInputChange(setPosition)}
+                placeholder="Position"
+              />
+            </div>
+            <div className="input-row">
+              <div className="inputs">Types/Topics:</div>
+              <input
+                className="input-container"
+                type="text"
+                value={types}
+                onChange={handleInputChange(setTypes)}
+                placeholder="Types/Topics"
+              />
+            </div>
+            <div className="input-row">
+              <div className="inputs">Number of Questions:</div>
+              <input
+                className="input-container"
+                type="text"
+                value={numQuestions}
+                onChange={handleInputChange(setNumQuestions)}
+                placeholder="Number of Questions"
+              />
+            </div>
+          </div>
+          <div className="generate-button-wrapper">
+            <button
+              className="generate-button"
+              onClick={() => handleGenerate()}
+            >
+              Generate
+            </button>
+          </div>
+        </div>
+        <div className="full-width-output">
+          {isLoading1 ? (
+            <p className="output1">Loading...</p>
+          ) : (
+            <p className="output1">{output1}</p>
+          )}
         </div>
       </div>
       <div className="descriptions">
