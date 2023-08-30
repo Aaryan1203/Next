@@ -63,11 +63,10 @@ function App() {
       <div className="outer-box">
         <div className="welcome-text">
           Hi! To help me help you with interview preparation, please let me know
-          what type of position you're interviewing for, the types of
-          questions/topics you want asked, and the number of questions you want
+          what type of position you're interviewing for, the type(s) of
+          questions you want asked, and the number of questions you want
           me to make for you to choose from!
         </div>
-        <div className="input-and-button-wrapper">
           <div className="question-generation-inputs">
             <div className="input-row">
               <div className="inputs">Position:</div>
@@ -76,38 +75,37 @@ function App() {
                 type="text"
                 value={position}
                 onChange={handleInputChange(setPosition)}
-                placeholder="Position"
+                placeholder="EX: data analyst"
               />
             </div>
             <div className="input-row">
-              <div className="inputs">Types/Topics:</div>
+              <div className="inputs">Type(s):</div>
               <input
                 className="input-container"
                 type="text"
                 value={types}
                 onChange={handleInputChange(setTypes)}
-                placeholder="Types/Topics"
+                placeholder="EX: adaptability"
               />
             </div>
             <div className="input-row">
-              <div className="inputs">Number of Questions:</div>
+              <div className="inputs"># of Questions:</div>
               <input
                 className="input-container"
                 type="text"
                 value={numQuestions}
                 onChange={handleInputChange(setNumQuestions)}
-                placeholder="Number of Questions"
+                placeholder="EX: 5"
               />
             </div>
-          </div>
-          <div className="generate-button-wrapper">
+        </div>
+        <div className="generate-button-wrapper">
             <button
               className="generate-button"
               onClick={() => handleGenerate()}
             >
               Generate
             </button>
-          </div>
         </div>
         <div className="full-width-output">
           {isLoading1 ? (
