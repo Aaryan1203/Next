@@ -32,7 +32,7 @@ async function getData({ prompt, systemRole }) {
   }
 }
 
-function useChatbot(finalUserInput, finalSystemRole) {
+function useChatbot(finalUserInput, finalSystemRole, regenerateCount) {
   const [output, setOutput] = useState("");
   const [isLoading, setLoading] = useState(false);
 
@@ -52,7 +52,7 @@ function useChatbot(finalUserInput, finalSystemRole) {
     };
 
     fetchData();
-  }, [finalUserInput, finalSystemRole]);
+  }, [finalUserInput, finalSystemRole, regenerateCount]);
 
   return { output, isLoading };
 }

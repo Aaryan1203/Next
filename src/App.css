@@ -65,7 +65,8 @@
 
 .outer-box {
   width: 1210px;
-  height: 500px;
+  min-height: 350px;
+  height: auto;
   border: 4px solid white;
   box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
   border-radius: 10px;
@@ -130,15 +131,12 @@
   color: white;
   font-family: "Courier New", Courier, monospace;
   font-size: 30px;
-  flex-grow: 1;
 }
 
 .input-row {
   display: flex;
-  align-items: center;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
+  padding-top: 30px;
 }
 
 .inputs {
@@ -147,24 +145,118 @@
 }
 
 .generate-button {
-  font-size: 1.5em;
+  font-size: 2em;
   color: white;
-  border: #fb2a7f solid 3px;
+  border: 4px solid white;
+  box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
   padding: 20px;
   border-radius: 10px;
   background-color: transparent;
   font-family: "Courier New", Courier, monospace;
+  margin-top: 40px;
+}
+
+.regenerate-button {
+  font-size: 2em;
+  color: white;
+  border: 4px solid white;
+  box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: transparent;
+  font-family: "Courier New", Courier, monospace;
+  margin-top: 40px;
+  margin-left: 320px;
 }
 
 .generate-button:hover {
-  background-color: white !important;
+  background-color: transparent !important;
+  box-shadow: 0 0 20px 0.01px #b40bd6, inset 0px 0px 20px 0.1px #b40bd6;
+  color: white !important;
+
+}
+.generate-button:active {
+  background-color: transparent !important;
+  box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
+  color: white !important;
 }
 
-.output1 {
+.regenerate-button:hover {
+  background-color: transparent !important;
+  box-shadow: 0 0 20px 0.01px #b40bd6, inset 0px 0px 20px 0.1px #b40bd6;
+  color: white !important;
+
+}
+.regenerate-button:active {
+  background-color: transparent !important;
+  box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
+  color: white !important;
+}
+
+.output1-loading {
   color: white;
   font-family: "Courier New", Courier, monospace;
   padding: 30px;
+  margin-top: 20px;
+  font-size: 3em;
+  margin-left: 450px;
 }
+
+.output1-questions {
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  padding: 30px;
+  margin-top: 30px;
+  font-size: 1.5em;
+  padding-left: 20px;
+}
+
+.output1-instructions {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.question-wrapper {
+  margin-bottom: 20px;  
+}
+
+.custom-checkbox {
+  display: none;
+}
+
+.custom-checkbox + label {
+  position: relative;
+  padding-left: 45px;
+  cursor: pointer;
+  font-size: 16px;
+  padding-top: 7px
+}
+
+.custom-checkbox + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #555;
+  border-radius: 4px;
+  padding: 2px
+}
+
+.custom-checkbox:checked + label:after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 6px;
+  width: 8px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
 
 .question-generation-inputs {
   display: flex;
@@ -174,14 +266,20 @@
 
 .input-container {
   font-family: "Courier New", Courier, monospace;
-  border-radius: 5px;
   height: 30px;
-  width: 150px
+  width: 150px;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  border-color: white;
+  padding-left: 5px;
 }
 
 .generate-button-wrapper {
+  justify-content: space-between;
   display: flex;
   align-self: center;
+  padding-top: 10px
 }
 
 .description-1 {

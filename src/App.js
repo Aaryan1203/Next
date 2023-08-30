@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Popup from "./Popup";
 import useChatbot from "./ChatBot";
+import "font-awesome/css/font-awesome.min.css";
 
 function App() {
   const [popupOpened, setPopupOpened] = useState(true);
@@ -15,10 +16,14 @@ function App() {
   const [position, setPosition] = useState("");
   const [types, setTypes] = useState("");
   const [numQuestions, setNumQuestions] = useState("");
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
+  const [regenerateCount, setRegenerateCount] = useState(0); // New state variable
+  const [hasGenerated, setHasGenerated] = useState(false);
 
   const { output: output1, isLoading: isLoading1 } = useChatbot(
     finalUserInput1,
-    systemRole1
+    systemRole1,
+    regenerateCount
   );
   const { output: output2, isLoading: isLoading2 } = useChatbot(
     finalUserInput2,
@@ -26,17 +31,35 @@ function App() {
   );
 
   const handleGenerate = () => {
+    setHasGenerated(true);
+
     setFinalUserInput1(
       `generate ${numQuestions} interview questions for a ${position} position focusing on ${types}`
     );
     setSystemRole1(
-      "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentances"
+      "You are going to be given a prompt to generate interview questions." +
+        "Make the questions a maximum of two sentances. Make sure the output" +
+        "is in the format '1. (question 1). 2. (question 2) and so on'"
     );
+  };
+
+  const handleRegenerate = () => {
+    setRegenerateCount((prevCount) => prevCount + 1);
   };
 
   const handleInputChange = (setState) => (e) => {
     setState(e.target.value);
   };
+
+  const toggleQuestion = (question) => {
+    if (selectedQuestions.includes(question)) {
+      setSelectedQuestions(selectedQuestions.filter((q) => q !== question));
+    } else {
+      setSelectedQuestions([...selectedQuestions, question]);
+    }
+  };
+
+  const questionsArray = output1.split(/\d+\.\s/).slice(1);
 
   // const handleSubmit2 = (newSystemRole) => {
   //   setFinalUserInput2(userInput2);
@@ -64,54 +87,75 @@ function App() {
         <div className="welcome-text">
           Hi! To help me help you with interview preparation, please let me know
           what type of position you're interviewing for, the type(s) of
-          questions you want asked, and the number of questions you want
-          me to make for you to choose from!
+          questions you want asked, and the number of questions you want me to
+          make for you to choose from!
         </div>
-          <div className="question-generation-inputs">
-            <div className="input-row">
-              <div className="inputs">Position:</div>
-              <input
-                className="input-container"
-                type="text"
-                value={position}
-                onChange={handleInputChange(setPosition)}
-                placeholder="EX: data analyst"
-              />
-            </div>
-            <div className="input-row">
-              <div className="inputs">Type(s):</div>
-              <input
-                className="input-container"
-                type="text"
-                value={types}
-                onChange={handleInputChange(setTypes)}
-                placeholder="EX: adaptability"
-              />
-            </div>
-            <div className="input-row">
-              <div className="inputs"># of Questions:</div>
-              <input
-                className="input-container"
-                type="text"
-                value={numQuestions}
-                onChange={handleInputChange(setNumQuestions)}
-                placeholder="EX: 5"
-              />
-            </div>
+        <div className="question-generation-inputs">
+          <div className="input-row">
+            <div className="inputs">Position:</div>
+            <input
+              className="input-container"
+              type="text"
+              value={position}
+              onChange={handleInputChange(setPosition)}
+              placeholder="EX: data analyst"
+            />
+          </div>
+          <div className="input-row">
+            <div className="inputs">Type(s):</div>
+            <input
+              className="input-container"
+              type="text"
+              value={types}
+              onChange={handleInputChange(setTypes)}
+              placeholder="EX: behavioral"
+            />
+          </div>
+          <div className="input-row">
+            <div className="inputs"># of Questions:</div>
+            <input
+              className="input-container"
+              type="text"
+              value={numQuestions}
+              onChange={handleInputChange(setNumQuestions)}
+              placeholder="EX: 5"
+            />
+          </div>
         </div>
         <div className="generate-button-wrapper">
-            <button
-              className="generate-button"
-              onClick={() => handleGenerate()}
-            >
-              Generate
-            </button>
+          <div style={{ width: "450px" }}></div>
+          <button className="generate-button" onClick={handleGenerate}>
+            Generate
+          </button>
+          <button className="regenerate-button" onClick={handleRegenerate}>
+            <i className="fa fa-refresh"></i>
+          </button>
         </div>
         <div className="full-width-output">
           {isLoading1 ? (
-            <p className="output1">Loading...</p>
+            <div className="output1-loading">Generating...</div>
           ) : (
-            <p className="output1">{output1}</p>
+            <div className="output1-questions">
+              {hasGenerated && (
+                <div className="output1-instructions">
+                  Please select the questions you would like to study with or
+                  regenerate a new set!
+                </div>
+              )}
+              {questionsArray.map((question, index) => (
+                <div key={index} className="question-wrapper">
+                  <input
+                    id={`checkbox-${index}`} // Unique id for each checkbox
+                    type="checkbox"
+                    className="custom-checkbox"
+                    checked={selectedQuestions.includes(question)}
+                    onChange={() => toggleQuestion(question)}
+                  />
+                  <label htmlFor={`checkbox-${index}`}>{question}</label>{" "}
+                  {/* Label for each checkbox */}
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
