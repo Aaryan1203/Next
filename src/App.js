@@ -16,9 +16,11 @@ function App() {
   const [position, setPosition] = useState("");
   const [types, setTypes] = useState("");
   const [numQuestions, setNumQuestions] = useState("");
+  const [answer, setAnswer] = useState("");
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [regenerateCount, setRegenerateCount] = useState(0); // New state variable
   const [hasGenerated, setHasGenerated] = useState(false);
+  const [practiceMode, setPracticeMode] = useState(false);
 
   const { output: output1, isLoading: isLoading1 } = useChatbot(
     finalUserInput1,
@@ -34,7 +36,7 @@ function App() {
     setHasGenerated(true);
 
     setFinalUserInput1(
-      `generate ${numQuestions} interview questions for a ${position} position focusing on ${types}`
+      `generate ${numQuestions} interview questions for a ${position} position focusing on ${types} questions`
     );
     setSystemRole1(
       "You are going to be given a prompt to generate interview questions." +
@@ -49,6 +51,10 @@ function App() {
 
   const handleInputChange = (setState) => (e) => {
     setState(e.target.value);
+  };
+
+  const handleStartPracticing = () => {
+    setPracticeMode(true);
   };
 
   const toggleQuestion = (question) => {
@@ -124,18 +130,41 @@ function App() {
         </div>
         <div className="generate-button-wrapper">
           <div style={{ width: "450px" }}></div>
+          {!practiceMode && (
+            <>
           <button className="generate-button" onClick={handleGenerate}>
             Generate
           </button>
           <button className="regenerate-button" onClick={handleRegenerate}>
             <i className="fa fa-refresh"></i>
           </button>
+          </>
+          )}
         </div>
         <div className="full-width-output">
           {isLoading1 ? (
             <div className="output1-loading">Generating...</div>
           ) : (
             <div className="output1-questions">
+              {practiceMode ? (
+                selectedQuestions.map((question, index) => (
+                  <div key={index} className="question-block">
+                    <div className="question-text">{question}</div>
+                      <input
+                        className="answer-container"
+                        type="text"
+                        value={answer}
+                        onChange={handleInputChange(setAnswer)}
+                        placeholder="Type answer"
+                      />
+                      <div>
+                        <button className="start-stop-recording-button">Start Recording</button>
+                      </div>
+                    <div className="timer">03:00</div>
+                  </div>
+                ))
+              ) : (
+                <>
               {hasGenerated && (
                 <div className="output1-instructions">
                   Please select the questions you would like to study with or
@@ -155,9 +184,16 @@ function App() {
                   {/* Label for each checkbox */}
                 </div>
               ))}
+              </>
+              )}
             </div>
           )}
         </div>
+        {!practiceMode && (
+            <button className="start-practicing-button" onClick={handleStartPracticing}>
+              Start Practicing!
+            </button>
+          )}
       </div>
       <div className="descriptions">
         <div className="description description-1">
