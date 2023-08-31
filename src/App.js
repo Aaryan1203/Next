@@ -10,26 +10,31 @@ function App() {
   // const [userInput2, setUserInput2] = useState("");
 
   const [finalUserInput1, setFinalUserInput1] = useState("");
-  const [finalUserInput2, setFinalUserInput2] = useState("");
   const [systemRole1, setSystemRole1] = useState("");
-  const [systemRole2, setSystemRole2] = useState("");
   const [position, setPosition] = useState("");
   const [types, setTypes] = useState("");
   const [numQuestions, setNumQuestions] = useState("");
-  const [answer, setAnswer] = useState("");
   const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [regenerateCount, setRegenerateCount] = useState(0); // New state variable
   const [hasGenerated, setHasGenerated] = useState(false);
   const [practiceMode, setPracticeMode] = useState(false);
+  const [answers, setAnswers] = useState({}); // New state variable to hold answers
+  const [recordingStarted, setRecordingStarted] = useState({});
+
+  const handleInputChangeForAnswer = (index) => (e) => {
+    setAnswers({
+      ...answers,
+      [index]: {
+        ...answers[index],
+        userInput: e.target.value,
+      },
+    });
+  };
 
   const { output: output1, isLoading: isLoading1 } = useChatbot(
     finalUserInput1,
     systemRole1,
     regenerateCount
-  );
-  const { output: output2, isLoading: isLoading2 } = useChatbot(
-    finalUserInput2,
-    systemRole2
   );
 
   const handleGenerate = () => {
@@ -67,10 +72,12 @@ function App() {
 
   const questionsArray = output1.split(/\d+\.\s/).slice(1);
 
-  // const handleSubmit2 = (newSystemRole) => {
-  //   setFinalUserInput2(userInput2);
-  //   setSystemRole2(newSystemRole);
-  // };
+  const handleStartRecording = (index) => {
+    setRecordingStarted((prev) => ({
+      ...prev,
+      [index]: true,
+    }));
+  };
 
   const openPopup = () => {
     setPopupOpened(true);
@@ -129,16 +136,16 @@ function App() {
           </div>
         </div>
         <div className="generate-button-wrapper">
-          <div style={{ width: "450px" }}></div>
+          <div style={{ width: "400px" }}></div>
           {!practiceMode && (
             <>
-          <button className="generate-button" onClick={handleGenerate}>
-            Generate
-          </button>
-          <button className="regenerate-button" onClick={handleRegenerate}>
-            <i className="fa fa-refresh"></i>
-          </button>
-          </>
+              <button className="generate-button" onClick={handleGenerate}>
+                Generate
+              </button>
+              <button className="regenerate-button" onClick={handleRegenerate}>
+                <i className="fa fa-refresh"></i>
+              </button>
+            </>
           )}
         </div>
         <div className="full-width-output">
@@ -150,50 +157,59 @@ function App() {
                 selectedQuestions.map((question, index) => (
                   <div key={index} className="question-block">
                     <div className="question-text">{question}</div>
-                      <input
-                        className="answer-container"
-                        type="text"
-                        value={answer}
-                        onChange={handleInputChange(setAnswer)}
-                        placeholder="Type answer"
-                      />
-                      <div>
-                        <button className="start-stop-recording-button">Start Recording</button>
-                      </div>
+                    <input
+                      className="answer-container"
+                      type="text"
+                      value={answers[index] || ""}
+                      onChange={handleInputChangeForAnswer(index)}
+                      placeholder="Type answer"
+                    />
+                    <button>Submit</button>
+                    <div>
+                      <button
+                        className="start-stop-recording-button"
+                        onClick={() => handleStartRecording(index)}
+                        disabled={recordingStarted[index]}
+                      >
+                        {recordingStarted[index] ? "Submit" : "Start Recording"}
+                      </button>
+                    </div>
                     <div className="timer">03:00</div>
                   </div>
                 ))
               ) : (
                 <>
-              {hasGenerated && (
-                <div className="output1-instructions">
-                  Please select the questions you would like to study with or
-                  regenerate a new set!
-                </div>
-              )}
-              {questionsArray.map((question, index) => (
-                <div key={index} className="question-wrapper">
-                  <input
-                    id={`checkbox-${index}`} // Unique id for each checkbox
-                    type="checkbox"
-                    className="custom-checkbox"
-                    checked={selectedQuestions.includes(question)}
-                    onChange={() => toggleQuestion(question)}
-                  />
-                  <label htmlFor={`checkbox-${index}`}>{question}</label>{" "}
-                  {/* Label for each checkbox */}
-                </div>
-              ))}
-              </>
+                  {hasGenerated && (
+                    <div className="output1-instructions">
+                      Please select the questions you would like to study with
+                      or regenerate a new set!
+                    </div>
+                  )}
+                  {questionsArray.map((question, index) => (
+                    <div key={index} className="question-wrapper">
+                      <input
+                        id={`checkbox-${index}`}
+                        type="checkbox"
+                        className="custom-checkbox"
+                        checked={selectedQuestions.includes(question)}
+                        onChange={() => toggleQuestion(question)}
+                      />
+                      <label htmlFor={`checkbox-${index}`}>{question}</label>{" "}
+                    </div>
+                  ))}
+                </>
               )}
             </div>
           )}
         </div>
-        {!practiceMode && (
-            <button className="start-practicing-button" onClick={handleStartPracticing}>
-              Start Practicing!
-            </button>
-          )}
+        {!practiceMode && selectedQuestions.length > 0 && (
+          <button
+            className="start-practicing-button"
+            onClick={handleStartPracticing}
+          >
+            Start Practicing!
+          </button>
+        )}
       </div>
       <div className="descriptions">
         <div className="description description-1">
@@ -252,3 +268,8 @@ function App() {
 }
 
 export default App;
+
+
+// `You are going to be given an interview question and some answer to the questions.` +
+// `Based on the interview question, give advice on how the user can` +
+// `improve their response. Question: ${question}`,

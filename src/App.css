@@ -127,6 +127,19 @@
   font-size: 30px;
 }
 
+.question-block {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.question-text {
+  text-align: start;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
 .question-generation-inputs {
   color: white;
   font-family: "Courier New", Courier, monospace;
@@ -166,7 +179,7 @@
   background-color: transparent;
   font-family: "Courier New", Courier, monospace;
   margin-top: 40px;
-  margin-left: 320px;
+  margin-left: 350px;
 }
 
 .generate-button:hover {
@@ -199,7 +212,7 @@
   padding: 30px;
   margin-top: 20px;
   font-size: 3em;
-  margin-left: 450px;
+  margin-left: 400px;
 }
 
 .output1-questions {
@@ -281,6 +294,54 @@
   align-self: center;
   padding-top: 10px
 }
+
+.start-stop-recording-button {
+  font-family: "Courier New", Courier, monospace;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  border-color: white;
+  padding-left: 5px;
+  font-size: 0.8em;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.timer {
+  margin-bottom: 30px;
+}
+
+.start-practicing-button {
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  border: 4px solid white;
+  box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: transparent;
+  width: 35%;
+  align-self: center;
+  margin-bottom: 30px;
+  font-size: 2em;
+}
+
+.start-practicing-button:hover {
+  background-color: transparent !important;
+  box-shadow: 0 0 20px 0.01px #b40bd6, inset 0px 0px 20px 0.1px #b40bd6;
+  color: white !important;
+
+}
+.start-practicing-button:active {
+  background-color: transparent !important;
+  box-shadow: 0 0 20px 0.01px #fb2a7f, inset 0px 0px 20px 0.1px #fb2a7f;
+  color: white !important;
+}
+
+
+
+
+
+
 
 .description-1 {
   box-shadow: 0 0 20px 0.01px #ffa3a6, inset 0px 0px 20px 0.1px #ffa3a6;
