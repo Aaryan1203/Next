@@ -160,7 +160,7 @@ function App() {
                     <input
                       className="answer-container"
                       type="text"
-                      value={answers[index] || ""}
+                      value={answers[index]?.userInput || ""}
                       onChange={handleInputChangeForAnswer(index)}
                       placeholder="Type answer"
                     />
@@ -268,8 +268,3 @@ function App() {
 }
 
 export default App;
-
-
-// `You are going to be given an interview question and some answer to the questions.` +
-// `Based on the interview question, give advice on how the user can` +
-// `improve their response. Question: ${question}`,
