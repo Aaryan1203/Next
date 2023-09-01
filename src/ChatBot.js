@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 async function getData({ prompt, systemRole }) {
   try {
     const gptResponse = await fetch(
@@ -32,29 +30,17 @@ async function getData({ prompt, systemRole }) {
   }
 }
 
-function useChatbot(finalUserInput, finalSystemRole, regenerateCount) {
-  const [output, setOutput] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await getData({
-          prompt: finalUserInput,
-          systemRole: finalSystemRole
-        });
-        setOutput(response);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [finalUserInput, finalSystemRole, regenerateCount]);
-
-  return { output, isLoading };
+async function fetchChatbotResponse(finalUserInput, finalSystemRole) {
+  try {
+    const response = await getData({
+      prompt: finalUserInput,
+      systemRole: finalSystemRole,
+    });
+    return { output: response, isLoading: false };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return { output: '', isLoading: false, error };
+  }
 }
 
-export default useChatbot;
+export default fetchChatbotResponse;

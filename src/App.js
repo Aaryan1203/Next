@@ -3,6 +3,7 @@ import "./App.css";
 import Popup from "./Popup";
 import useChatbot from "./ChatBot";
 import "font-awesome/css/font-awesome.min.css";
+import fetchChatbotResponse from "./ChatBot";
 
 function App() {
   const [popupOpened, setPopupOpened] = useState(true);
@@ -15,11 +16,15 @@ function App() {
   const [types, setTypes] = useState("");
   const [numQuestions, setNumQuestions] = useState("");
   const [selectedQuestions, setSelectedQuestions] = useState([]);
-  const [regenerateCount, setRegenerateCount] = useState(0); // New state variable
+  const [regenerateCount, setRegenerateCount] = useState(0);
   const [hasGenerated, setHasGenerated] = useState(false);
   const [practiceMode, setPracticeMode] = useState(false);
-  const [answers, setAnswers] = useState({}); // New state variable to hold answers
+  const [answers, setAnswers] = useState({});
   const [recordingStarted, setRecordingStarted] = useState({});
+  const [submittedQuestions, setSubmittedQuestions] = useState({});
+  const [chatbotResponses, setChatbotResponses] = useState({});
+  const [output1, setOutput1] = useState("");
+  const [isLoading1, setIsLoading1] = useState(false);
 
   const handleInputChangeForAnswer = (index) => (e) => {
     setAnswers({
@@ -31,23 +36,52 @@ function App() {
     });
   };
 
-  const { output: output1, isLoading: isLoading1 } = useChatbot(
-    finalUserInput1,
-    systemRole1,
-    regenerateCount
-  );
+  const handleQuestionSubmit = async (index) => {
+    setSubmittedQuestions({
+      ...submittedQuestions,
+      [index]: true,
+    });
 
-  const handleGenerate = () => {
+    const originalQuestion = selectedQuestions[index];
+    const answer = answers[index]?.userInput || "";
+
+    const systemRoleForThisQuestion = `The original interview question was: '${originalQuestion}'. 
+    Please provide constructive feedback on the answer. Respond as if you are talking to the user and a maximum of 5 sentances`;
+
+    const {
+      output: chatbotOutput,
+      isLoading,
+      error,
+    } = await fetchChatbotResponse(answer, systemRoleForThisQuestion);
+
+    setChatbotResponses({
+      ...chatbotResponses,
+      [index]: chatbotOutput,
+    });
+  };
+
+  const handleGenerate = async () => {
+    setIsLoading1(true);
     setHasGenerated(true);
-
     setFinalUserInput1(
       `generate ${numQuestions} interview questions for a ${position} position focusing on ${types} questions`
     );
     setSystemRole1(
-      "You are going to be given a prompt to generate interview questions." +
-        "Make the questions a maximum of two sentances. Make sure the output" +
-        "is in the format '1. (question 1). 2. (question 2) and so on'"
+      "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentences. Make sure the output is in the format '1. (question 1). 2. (question 2) and so on'"
     );
+
+    const { output, isLoading, error } = await fetchChatbotResponse(
+      finalUserInput1,
+      systemRole1
+    );
+
+    setIsLoading1(false);
+
+    if (error) {
+      console.error("Error while generating questions:", error);
+    } else {
+      setOutput1(output);
+    }
   };
 
   const handleRegenerate = () => {
@@ -69,8 +103,6 @@ function App() {
       setSelectedQuestions([...selectedQuestions, question]);
     }
   };
-
-  const questionsArray = output1.split(/\d+\.\s/).slice(1);
 
   const handleStartRecording = (index) => {
     setRecordingStarted((prev) => ({
@@ -164,14 +196,23 @@ function App() {
                       onChange={handleInputChangeForAnswer(index)}
                       placeholder="Type answer"
                     />
-                    <button>Submit</button>
+                    <button onClick={() => handleQuestionSubmit(index)}>
+                      Submit
+                    </button>
+                    {submittedQuestions[index] && (
+                      <div className="output-box" style={{ height: "auto" }}>
+                        {chatbotResponses[index] || "Loading..."}
+                      </div>
+                    )}
                     <div>
                       <button
                         className="start-stop-recording-button"
                         onClick={() => handleStartRecording(index)}
                         disabled={recordingStarted[index]}
                       >
-                        {recordingStarted[index] ? "Submit" : "Start Recording"}
+                        {recordingStarted[index]
+                          ? "Recording..."
+                          : "Start Recording"}
                       </button>
                     </div>
                     <div className="timer">03:00</div>
@@ -185,18 +226,21 @@ function App() {
                       or regenerate a new set!
                     </div>
                   )}
-                  {questionsArray.map((question, index) => (
-                    <div key={index} className="question-wrapper">
-                      <input
-                        id={`checkbox-${index}`}
-                        type="checkbox"
-                        className="custom-checkbox"
-                        checked={selectedQuestions.includes(question)}
-                        onChange={() => toggleQuestion(question)}
-                      />
-                      <label htmlFor={`checkbox-${index}`}>{question}</label>{" "}
-                    </div>
-                  ))}
+                  {output1
+                    .split(/\d+\.\s/)
+                    .slice(1)
+                    .map((question, index) => (
+                      <div key={index} className="question-wrapper">
+                        <input
+                          id={`checkbox-${index}`}
+                          type="checkbox"
+                          className="custom-checkbox"
+                          checked={selectedQuestions.includes(question)}
+                          onChange={() => toggleQuestion(question)}
+                        />
+                        <label htmlFor={`checkbox-${index}`}>{question}</label>{" "}
+                      </div>
+                    ))}
                 </>
               )}
             </div>
