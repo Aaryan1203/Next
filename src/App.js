@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
 import Popup from "./Popup";
-import useChatbot from "./ChatBot";
-import "font-awesome/css/font-awesome.min.css";
 import fetchChatbotResponse from "./ChatBot";
 
 function App() {
@@ -48,12 +46,10 @@ function App() {
     Please provide constructive feedback on the answer. Respond as if you are talking to the user and respond in 6 sentances.
     Format it such that you give two bullet points on what you liked (two sentences), two bullet points on what you think can 
     be improved (two sentences), and conclude with an overall evaluation (two sentences). Make sure to seperate each sentance with 
-    a "-" so it is like a bullet point`;
+    a "*" so it is like a bullet point`;
 
     const {
       output: chatbotOutput,
-      isLoading,
-      error,
     } = await fetchChatbotResponse(answer, systemRoleForThisQuestion);
 
     setChatbotResponses({
@@ -72,7 +68,7 @@ function App() {
       "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentences. Make sure the output is in the format '1. (question 1). 2. (question 2) and so on'"
     );
 
-    const { output, isLoading, error } = await fetchChatbotResponse(
+    const { output, error } = await fetchChatbotResponse(
       finalUserInput1,
       systemRole1
     );
@@ -197,7 +193,7 @@ function App() {
                       <div className="output-box" style={{ height: "auto" }}>
                         {chatbotResponses[index]
                           ? chatbotResponses[index]
-                              .split("-")
+                              .split("*")
                               .filter((sentence) => sentence.trim() !== "")
                               .map((sentence, i) => (
                                 <div key={i} style={{ marginBottom: 15 }}>
