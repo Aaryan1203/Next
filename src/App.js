@@ -46,7 +46,10 @@ function App() {
     const answer = answers[index]?.userInput || "";
 
     const systemRoleForThisQuestion = `The original interview question was: '${originalQuestion}'. 
-    Please provide constructive feedback on the answer. Respond as if you are talking to the user and a maximum of 5 sentances`;
+    Please provide constructive feedback on the answer. Respond as if you are talking to the user and respond in 6 sentances.
+    Format it such that you give two bullet points on what you liked (two sentences), two bullet points on what you think can 
+    be improved (two sentences), and conclude with an overall evaluation (two sentences). In formatting it this way, please 
+    separate each section by paragraph.`;
 
     const {
       output: chatbotOutput,

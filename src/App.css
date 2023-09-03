@@ -338,14 +338,15 @@
 }
 
 .output-box {
-  border: 1px solid black;
+  border: 4px solid white;
+  box-shadow: 0 0 20px 0.01px #00f, inset 0px 0px 20px 0.1px #00f;
   padding: 10px;
   height: "auto";
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
   
 }
-
-
-
 
 
 .description-1 {
