@@ -16,7 +16,6 @@ function App() {
   const [types, setTypes] = useState("");
   const [numQuestions, setNumQuestions] = useState("");
   const [selectedQuestions, setSelectedQuestions] = useState([]);
-  const [regenerateCount, setRegenerateCount] = useState(0);
   const [hasGenerated, setHasGenerated] = useState(false);
   const [practiceMode, setPracticeMode] = useState(false);
   const [answers, setAnswers] = useState({});
@@ -48,8 +47,8 @@ function App() {
     const systemRoleForThisQuestion = `The original interview question was: '${originalQuestion}'. 
     Please provide constructive feedback on the answer. Respond as if you are talking to the user and respond in 6 sentances.
     Format it such that you give two bullet points on what you liked (two sentences), two bullet points on what you think can 
-    be improved (two sentences), and conclude with an overall evaluation (two sentences). In formatting it this way, please 
-    separate each section by paragraph.`;
+    be improved (two sentences), and conclude with an overall evaluation (two sentences). Make sure to seperate each sentance with 
+    a "-" so it is like a bullet point`;
 
     const {
       output: chatbotOutput,
@@ -85,10 +84,6 @@ function App() {
     } else {
       setOutput1(output);
     }
-  };
-
-  const handleRegenerate = () => {
-    setRegenerateCount((prevCount) => prevCount + 1);
   };
 
   const handleInputChange = (setState) => (e) => {
@@ -171,14 +166,10 @@ function App() {
           </div>
         </div>
         <div className="generate-button-wrapper">
-          <div style={{ width: "400px" }}></div>
           {!practiceMode && (
             <>
               <button className="generate-button" onClick={handleGenerate}>
-                Generate
-              </button>
-              <button className="regenerate-button" onClick={handleRegenerate}>
-                <i className="fa fa-refresh"></i>
+                {hasGenerated ? "Regenerate" : "Generate"}
               </button>
             </>
           )}
@@ -204,9 +195,18 @@ function App() {
                     </button>
                     {submittedQuestions[index] && (
                       <div className="output-box" style={{ height: "auto" }}>
-                        {chatbotResponses[index] || "Loading..."}
+                        {chatbotResponses[index]
+                          ? chatbotResponses[index]
+                              .split("-")
+                              .filter((sentence) => sentence.trim() !== "")
+                              .map((sentence, i) => (
+                                <div key={i} style={{ marginBottom: 15 }}>
+                                  * {sentence.trim()}
+                                </div>
+                              ))
+                          : "Loading..."}
                       </div>
-                    )}
+                    )}{" "}
                     <div>
                       <button
                         className="start-stop-recording-button"
