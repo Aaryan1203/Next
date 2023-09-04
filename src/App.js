@@ -18,7 +18,7 @@ function App() {
   const [submittedQuestions, setSubmittedQuestions] = useState({});
   const [chatbotResponses, setChatbotResponses] = useState({});
   const [output1, setOutput1] = useState("");
-  const [regenerateCounter, setRegenerateCounter] = useState(false);
+  const [regenerateCounter, setRegenerateCounter] = useState(0);
   const [isLoading1, setIsLoading1] = useState(false);
 
   const handleInputChangeForAnswer = (index) => (e) => {
@@ -79,7 +79,7 @@ function App() {
 
       fetchData();
     }
-  }, [finalUserInput1, systemRole1, ]);
+  }, [finalUserInput1, systemRole1, regenerateCounter]);
 
   const handleGenerate = async () => {
     const generatedUserInput = `generate ${numQuestions} interview questions for a ${position} position focusing on ${types} questions`;
@@ -88,6 +88,10 @@ function App() {
     const generatedSystemRole =
       "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentences. Make sure the output is in the format '1. (question 1). 2. (question 2) and so on'";
     setSystemRole1(generatedSystemRole);
+  };
+
+  const handleRegenerate = () => {
+    setRegenerateCounter(regenerateCounter + 1);
   };
 
   const handleInputChange = (setState) => (e) => {
@@ -172,7 +176,10 @@ function App() {
         <div className="generate-button-wrapper">
           {!practiceMode && (
             <>
-              <button className="generate-button" onClick={handleGenerate}>
+              <button
+                className="generate-button"
+                onClick={hasGenerated ? handleRegenerate : handleGenerate}
+              >
                 {hasGenerated ? "Regenerate" : "Generate"}
               </button>
             </>
