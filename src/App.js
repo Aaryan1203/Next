@@ -48,9 +48,10 @@ function App() {
     on what you think can be improved, and conclude with an overall evaluation (one sentence). Make sure to separate each sentence with 
     a "*" so it is like a bullet point.`;
 
-    const {
-      output: chatbotOutput,
-    } = await fetchChatbotResponse(answer, systemRoleForThisQuestion);
+    const { output: chatbotOutput } = await fetchChatbotResponse(
+      answer,
+      systemRoleForThisQuestion
+    );
 
     setChatbotResponses({
       ...chatbotResponses,
@@ -70,24 +71,24 @@ function App() {
         );
 
         setIsLoading1(false);
-  
+
         if (error) {
           console.error("Error while generating questions:", error);
         } else {
           setOutput1(output);
         }
       };
-      
+
       fetchData();
     }
   }, [finalUserInput1, systemRole1]);
-  
-  const handleGenerate = async () => {
 
-    const generatedUserInput = `generate ${numQuestions} interview questions for a ${position} position focusing on ${types} questions`
+  const handleGenerate = async () => {
+    const generatedUserInput = `generate ${numQuestions} interview questions for a ${position} position focusing on ${types} questions`;
     setFinalUserInput1(generatedUserInput);
 
-    const generatedSystemRole = "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentences. Make sure the output is in the format '1. (question 1). 2. (question 2) and so on'"
+    const generatedSystemRole =
+      "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentences. Make sure the output is in the format '1. (question 1). 2. (question 2) and so on'";
     setSystemRole1(generatedSystemRole);
   };
 
@@ -187,7 +188,9 @@ function App() {
               {practiceMode ? (
                 selectedQuestions.map((question, index) => (
                   <div key={index} className="question-block">
-                    <div className="question-text">{question}</div>
+                    <div className="question-text">{`${
+                      index + 1
+                    }. ${question}`}</div>
                     <input
                       className="answer-container"
                       type="text"
