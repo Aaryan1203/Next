@@ -16,25 +16,23 @@ function Popup({ isOpen, onRequestClose }) {
         </b>
       </div>
       <div className="popup-description">
-        More often than not, anxiety stems from feeling unprepared. This is what
-        can make interviews feel so daunting; thinking you won't know how to
-        answer an interviewee's questions can make the interview feel over
-        before it's even begun. But, what if you could practice enough to be
-        comfortable being uncomfortable, always having something to say and
-        adapting on the spot? This is where we can help:
-        <br></br>
-        <br></br>
-        <i>
-          Next will generate the best interview questions that you can choose to
-          answer, give you a couple of minutes to record a response, and then
-          offer constructive feedback for next time!
-        </i>
-        <br></br>
-        <br></br>
-        Just knowing the most common questions and watching videos on how other
-        people would respond isn't enough; you'd like to answer these questions
-        yourself and know that you'll thrive! Using ChatGPT and voice-to-text
-        technology, we'll make sure you ace your next interview!
+        Anxiety often arises from a sense of unpreparedness, a feeling that can
+        make interviews seem overwhelming before they even begin. Imagine,
+        however, being so well-practiced that you're comfortable even in
+        uncomfortable situations—always ready with a response and able to adapt
+        on the fly. That's where our platform steps in to empower you
+        <div className="popup-description-sub">
+          <i>
+            Next will generate the best interview questions that you can choose
+            to answer, give you a couple of minutes to record a response, and
+            then offer constructive feedback for next time!
+          </i>
+        </div>
+        Being familiar with common questions and observing others' responses is
+        a great start, but true confidence comes from practicing your own
+        answers. With the aid of ChatGPT and voice-to-text technology, we're
+        committed to helping you not just survive, but truly excel in your
+        upcoming interview
         <div>
           <br></br>
           Are you ready for what's <i>NEXT</i>?

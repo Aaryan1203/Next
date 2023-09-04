@@ -5,9 +5,6 @@ import fetchChatbotResponse from "./ChatBot";
 
 function App() {
   const [popupOpened, setPopupOpened] = useState(true);
-  // const [userInput1, setUserInput1] = useState("");
-  // const [userInput2, setUserInput2] = useState("");
-
   const [finalUserInput1, setFinalUserInput1] = useState("");
   const [systemRole1, setSystemRole1] = useState("");
   const [position, setPosition] = useState("");
@@ -21,6 +18,7 @@ function App() {
   const [submittedQuestions, setSubmittedQuestions] = useState({});
   const [chatbotResponses, setChatbotResponses] = useState({});
   const [output1, setOutput1] = useState("");
+  const [regenerateCounter, setRegenerateCounter] = useState(false);
   const [isLoading1, setIsLoading1] = useState(false);
 
   const handleInputChangeForAnswer = (index) => (e) => {
@@ -81,7 +79,7 @@ function App() {
 
       fetchData();
     }
-  }, [finalUserInput1, systemRole1]);
+  }, [finalUserInput1, systemRole1, ]);
 
   const handleGenerate = async () => {
     const generatedUserInput = `generate ${numQuestions} interview questions for a ${position} position focusing on ${types} questions`;
