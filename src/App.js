@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Popup from "./Popup";
 import fetchChatbotResponse from "./ChatBot";
@@ -43,10 +43,10 @@ function App() {
     const answer = answers[index]?.userInput || "";
 
     const systemRoleForThisQuestion = `The original interview question was: '${originalQuestion}'. 
-    Please provide constructive feedback on the answer. Respond as if you are talking to the user and respond in 6 sentances.
-    Format it such that you give two bullet points on what you liked (two sentences), two bullet points on what you think can 
-    be improved (two sentences), and conclude with an overall evaluation (two sentences). Make sure to seperate each sentance with 
-    a "*" so it is like a bullet point`;
+    Please provide constructive feedback on the answer. Respond as if you are talking to the user and respond in 5 sentences.
+    Format it such that you give two bullet points (one sentence each) on what you liked, two bullet points (one sentence each)
+    on what you think can be improved, and conclude with an overall evaluation (one sentence). Make sure to separate each sentence with 
+    a "*" so it is like a bullet point.`;
 
     const {
       output: chatbotOutput,
@@ -58,28 +58,37 @@ function App() {
     });
   };
 
-  const handleGenerate = async () => {
-    setIsLoading1(true);
-    setHasGenerated(true);
-    setFinalUserInput1(
-      `generate ${numQuestions} interview questions for a ${position} position focusing on ${types} questions`
-    );
-    setSystemRole1(
-      "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentences. Make sure the output is in the format '1. (question 1). 2. (question 2) and so on'"
-    );
+  useEffect(() => {
+    if (finalUserInput1 && systemRole1) {
+      const fetchData = async () => {
+        setIsLoading1(true);
+        setHasGenerated(true);
 
-    const { output, error } = await fetchChatbotResponse(
-      finalUserInput1,
-      systemRole1
-    );
+        const { output, error } = await fetchChatbotResponse(
+          finalUserInput1,
+          systemRole1
+        );
 
-    setIsLoading1(false);
-
-    if (error) {
-      console.error("Error while generating questions:", error);
-    } else {
-      setOutput1(output);
+        setIsLoading1(false);
+  
+        if (error) {
+          console.error("Error while generating questions:", error);
+        } else {
+          setOutput1(output);
+        }
+      };
+      
+      fetchData();
     }
+  }, [finalUserInput1, systemRole1]);
+  
+  const handleGenerate = async () => {
+
+    const generatedUserInput = `generate ${numQuestions} interview questions for a ${position} position focusing on ${types} questions`
+    setFinalUserInput1(generatedUserInput);
+
+    const generatedSystemRole = "You are going to be given a prompt to generate interview questions. Make the questions a maximum of two sentences. Make sure the output is in the format '1. (question 1). 2. (question 2) and so on'"
+    setSystemRole1(generatedSystemRole);
   };
 
   const handleInputChange = (setState) => (e) => {
@@ -189,20 +198,6 @@ function App() {
                     <button onClick={() => handleQuestionSubmit(index)}>
                       Submit
                     </button>
-                    {submittedQuestions[index] && (
-                      <div className="output-box" style={{ height: "auto" }}>
-                        {chatbotResponses[index]
-                          ? chatbotResponses[index]
-                              .split("*")
-                              .filter((sentence) => sentence.trim() !== "")
-                              .map((sentence, i) => (
-                                <div key={i} style={{ marginBottom: 15 }}>
-                                  * {sentence.trim()}
-                                </div>
-                              ))
-                          : "Loading..."}
-                      </div>
-                    )}{" "}
                     <div>
                       <button
                         className="start-stop-recording-button"
@@ -215,6 +210,21 @@ function App() {
                       </button>
                     </div>
                     <div className="timer">03:00</div>
+                    {submittedQuestions[index] && (
+                      <div className="output-box" style={{ height: "auto" }}>
+                        <div className="feedback">Feedback:</div>
+                        {chatbotResponses[index]
+                          ? chatbotResponses[index]
+                              .split("*")
+                              .filter((sentence) => sentence.trim() !== "")
+                              .map((sentence, i) => (
+                                <div key={i} style={{ marginBottom: 15 }}>
+                                  * {sentence.trim()}
+                                </div>
+                              ))
+                          : "Loading..."}
+                      </div>
+                    )}{" "}
                   </div>
                 ))
               ) : (

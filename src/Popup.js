@@ -3,6 +3,7 @@ import ReactModal from "react-modal";
 import "./Popup.css";
 
 function Popup({ isOpen, onRequestClose }) {
+
   return (
     <ReactModal
       isOpen={isOpen}
@@ -10,6 +11,13 @@ function Popup({ isOpen, onRequestClose }) {
       className="popup"
       overlayClassName="overlay"
     >
+      <div className="about-next">
+          <b>
+            <i>
+            NEXT
+            </i>
+          </b>
+      </div>
       <div className="popup-description">
         More often than not, anxiety stems from feeling unprepared. This is what
         can make interviews feel so daunting; thinking you won't know how to
@@ -28,7 +36,7 @@ function Popup({ isOpen, onRequestClose }) {
           <br></br>
           Are you ready for what's{" "}
           <i>
-            <b>NEXT</b>
+            NEXT
           </i>
           ?
         </div>
