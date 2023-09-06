@@ -20,6 +20,40 @@ function App() {
   const [output1, setOutput1] = useState("");
   const [regenerateCounter, setRegenerateCounter] = useState(0);
   const [isLoading1, setIsLoading1] = useState(false);
+  const [recognitionObjects, setRecognitionObjects] = useState({});
+
+  const handleSpeechRecognition = (index) => {
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.continuous = true;
+
+    recognition.onresult = function (event) {
+      const transcript =
+        event.results[event.results.length - 1][0].transcript.trim();
+
+      setAnswers({
+        ...answers,
+        [index]: {
+          ...answers[index],
+          userInput: transcript,
+        },
+      });
+    };
+
+    recognition.onerror = function (event) {
+      console.error("Error occurred in recognition: " + event.error);
+    };
+
+    recognition.onend = function () {
+      setRecordingStarted({
+        ...recordingStarted,
+        [index]: false,
+      });
+    };
+
+    recognition.start();
+
+    return recognition;
+  };
 
   const handleInputChangeForAnswer = (index) => (e) => {
     setAnswers({
@@ -38,7 +72,7 @@ function App() {
     });
 
     const originalQuestion = selectedQuestions[index];
-    const answer = answers[index]?.userInput || "";
+    const answer = answers[index].userInput || "";
 
     const systemRoleForThisQuestion = `The original interview question was: '${originalQuestion}'. 
     Please provide constructive feedback on the answer. Respond as if you are talking to the user and respond in 5 sentences.
@@ -110,11 +144,25 @@ function App() {
     }
   };
 
-  const handleStartRecording = (index) => {
-    setRecordingStarted((prev) => ({
-      ...prev,
-      [index]: true,
-    }));
+  const toggleRecording = (index) => {
+    if (recordingStarted[index]) {
+      const recognition = recognitionObjects[index];
+      recognition && recognition.stop();
+      setRecordingStarted({
+        ...recordingStarted,
+        [index]: false,
+      });
+    } else {
+      const recognition = handleSpeechRecognition(index);
+      setRecognitionObjects({
+        ...recognitionObjects,
+        [index]: recognition,
+      });
+      setRecordingStarted({
+        ...recordingStarted,
+        [index]: true,
+      });
+    }
   };
 
   const openPopup = () => {
@@ -202,22 +250,20 @@ function App() {
                       value={answers[index]?.userInput || ""}
                       onChange={handleInputChangeForAnswer(index)}
                       placeholder="Type answer"
-                    />
+                    />{" "}
                     <button onClick={() => handleQuestionSubmit(index)}>
                       Submit
                     </button>
                     <div>
                       <button
                         className="start-stop-recording-button"
-                        onClick={() => handleStartRecording(index)}
-                        disabled={recordingStarted[index]}
+                        onClick={() => toggleRecording(index)}
                       >
                         {recordingStarted[index]
-                          ? "Recording..."
+                          ? "Stop Recording"
                           : "Start Recording"}
                       </button>
                     </div>
-                    <div className="timer">03:00</div>
                     {submittedQuestions[index] && (
                       <div className="output-box" style={{ height: "auto" }}>
                         <div className="feedback">Feedback:</div>
