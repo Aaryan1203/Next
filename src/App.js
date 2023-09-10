@@ -288,7 +288,7 @@ function App() {
                               ))
                           : "Loading..."}
                       </div>
-                    )}{" "}
+                    )}
                   </div>
                 ))
               ) : (
