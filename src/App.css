@@ -128,7 +128,7 @@
   margin-top: 30px;
   margin-left: 30px;
   margin-right: 30px;
-  font-size: 30px;
+  font-size: 34px;
 }
 
 .question-block {
@@ -159,6 +159,7 @@
 .inputs {
   margin-right: 10px;
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .generate-button {
@@ -214,11 +215,15 @@
 }
 
 .output1-instructions {
+  font-size: 23px;
   text-align: center;
   margin-bottom: 30px;
   font-weight: bold;
 }
 
+.response-instructions {
+  margin-bottom: 50px;
+}
 .question-wrapper {
   margin-bottom: 20px;
 }

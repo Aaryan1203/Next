@@ -184,9 +184,9 @@ function App() {
       <div className="app-slogan">Ask. Answer. Ace.</div>
       <div className="outer-box">
         <div className="welcome-text">
-          Hi! To help me help you with interview preparation, please let me know
-          what type of position you're interviewing for, the type(s) of
-          questions you want asked, and the number of questions you want me to
+          Hi! To allow me to help you with interview preparation, please let me know
+          the position you're interviewing for, the type(s) of
+          questions you want asked, and how many questions you want me to
           make for you to choose from!
         </div>
         <div className="question-generation-inputs">
@@ -197,7 +197,7 @@ function App() {
               type="text"
               value={position}
               onChange={handleInputChange(setPosition)}
-              placeholder="EX: data analyst"
+              placeholder="EX: doctor"
             />
           </div>
           <div className="input-row">
@@ -207,7 +207,7 @@ function App() {
               type="text"
               value={types}
               onChange={handleInputChange(setTypes)}
-              placeholder="EX: behavioral"
+              placeholder="EX: patient care"
             />
           </div>
           <div className="input-row">
@@ -238,6 +238,16 @@ function App() {
             <div className="output1-loading">Generating...</div>
           ) : (
             <div className="output1-questions">
+              <div className="response-instructions">
+                Time to practice! Feel free to answer whichever questions you 
+                want in any order you want. For each question, simply click the 
+                "Start Recording" button, answer the question to the best of your 
+                ability, and click the "Stop Recording" button. Then, edit your answer 
+                if your some of your words were accidentally misheard, and submit your 
+                response to get instantaneous feedback! You'll also be able to re-record
+                and practice these questions as many times as you want; simply click
+                the "Answer Again" button!
+              </div>
               {practiceMode ? (
                 selectedQuestions.map((question, index) => (
                   <div key={index} className="question-block">
