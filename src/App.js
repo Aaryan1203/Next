@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Popup from "./Popup";
 import fetchChatbotResponse from "./ChatBot";
@@ -21,20 +21,29 @@ function App() {
   const [regenerateCounter, setRegenerateCounter] = useState(0);
   const [isLoading1, setIsLoading1] = useState(false);
   const [recognitionObjects, setRecognitionObjects] = useState({});
+  const HAVE_NOT_STARTED = "haveNotStarted";
+  const [recordingState, setRecordingState] = useState(Array(selectedQuestions.length).fill(HAVE_NOT_STARTED));
+  const recognitionRef = useRef({});
+  const [showButtons, setShowButtons] = useState(true);
 
   const handleSpeechRecognition = (index) => {
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = true;
 
     recognition.onresult = function (event) {
-      const transcript =
-        event.results[event.results.length - 1][0].transcript.trim();
+
+      let accumulatedTranscriptRef = "";
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        accumulatedTranscriptRef += transcript + " ";
+      }
 
       setAnswers({
         ...answers,
         [index]: {
           ...answers[index],
-          userInput: transcript,
+          userInput: accumulatedTranscriptRef.trim(),
         },
       });
     };
@@ -52,6 +61,7 @@ function App() {
 
     recognition.start();
 
+    recognitionRef.current[index] = recognition;
     return recognition;
   };
 
@@ -66,10 +76,14 @@ function App() {
   };
 
   const handleQuestionSubmit = async (index) => {
+
+    console.log("Submitting question with index:", index);
+
     setSubmittedQuestions({
       ...submittedQuestions,
       [index]: true,
     });
+
 
     const originalQuestion = selectedQuestions[index];
     const answer = answers[index].userInput || "";
@@ -89,6 +103,8 @@ function App() {
       ...chatbotResponses,
       [index]: chatbotOutput,
     });
+
+    setShowButtons(false);
   };
 
   useEffect(() => {
@@ -145,29 +161,89 @@ function App() {
   };
 
   const toggleRecording = (index) => {
-    if (recordingStarted[index]) {
-      const recognition = recognitionObjects[index];
-      recognition && recognition.stop();
-      setRecordingStarted({
-        ...recordingStarted,
-        [index]: false,
-      });
-    } else {
-      const recognition = handleSpeechRecognition(index);
-      setRecognitionObjects({
-        ...recognitionObjects,
-        [index]: recognition,
-      });
-      setRecordingStarted({
-        ...recordingStarted,
-        [index]: true,
-      });
-    }
+
+    console.log("toggleRecording called for index:", index);
+
+    setRecordingState(updatedRecordingState => {
+
+      const newRecordingState = [... updatedRecordingState];
+      if (updatedRecordingState[index] === "recording") {
+        const recognition = recognitionObjects[index];
+        recognition && recognition.stop();
+        newRecordingState[index] = "stoppedRecording";
+      } else if (updatedRecordingState[index] !== "stoppedRecording") {
+        const recognition = handleSpeechRecognition(index);
+        setRecognitionObjects({
+         ... recognitionObjects,
+          [index]: recognition,
+        });
+        newRecordingState[index] = "recording";
+      }
+      return [...newRecordingState];
+    });
   };
+
+  const handleAnswerAgain = (index) => {
+
+    setAnswers({
+      ...answers,
+      [index]: {
+        ...answers[index],
+        userInput: "",
+      },
+    });
+
+    setChatbotResponses({
+      ...chatbotResponses,
+      [index]: undefined,
+    });
+
+    setRecordingState((prevRecordingState) => {
+      const newRecordingState = [...prevRecordingState];
+      newRecordingState[index] = HAVE_NOT_STARTED;
+      return newRecordingState;
+    });
+
+    setSubmittedQuestions({
+      ...submittedQuestions,
+      [index]: false,
+    }); 
+
+    setShowButtons(true);
+
+    fetchNewChatbotResponse(index);
+  };
+
+  const fetchNewChatbotResponse = async (index) => {
+    const originalQuestion = selectedQuestions[index];
+    const answer = answers[index].userInput || "";
+
+    const systemRoleForThisQuestion = `The original interview question was: '${originalQuestion}'. 
+    Please provide constructive feedback on the answer. Respond as if you are talking to the user and respond in 5 sentences.
+    Format it such that you give two bullet points (one sentence each) on what you liked, two bullet points (one sentence each)
+    on what you think can be improved, and conclude with an overall evaluation (one sentence). Make sure to separate each sentence with 
+    a "*" so it is like a bullet point.`;
+
+  setChatbotResponses({
+    ...chatbotResponses,
+    [index]: undefined,
+  });
+
+  setTimeout(async () => {
+    const { output: chatbotOutput } = await fetchChatbotResponse(
+      answer,
+      systemRoleForThisQuestion
+    );
+    setChatbotResponses({
+      ...chatbotResponses,
+      [index]: chatbotOutput,
+    });
+  }, 3000);
+  }
 
   const openPopup = () => {
     setPopupOpened(true);
-  };
+  }; 
 
   const closePopup = () => {
     setPopupOpened(false);
@@ -256,7 +332,7 @@ function App() {
                     <div className="question-text">{`${
                       index + 1
                     }. ${question}`}</div>
-                    {recordingStarted[index] && (
+                    {(recordingState[index] === "recording" || recordingState[index] === "stoppedRecording") && (
                     <input
                       className="answer-container"
                       type="text"
@@ -265,26 +341,31 @@ function App() {
                     />
                     )}
                     <div>
+                      {(showButtons || (recordingState[index] === HAVE_NOT_STARTED)) && (
                       <button
                         className="start-stop-recording-button"
                         onClick={() => toggleRecording(index)}
+                        disabled={recordingState[index] === "stoppedRecording"}
                       >
-                        {recordingStarted[index]
+                        {(recordingState[index] === "recording" || recordingState[index] === "stoppedRecording")
                           ? "Stop Recording"
                           : "Start Recording"}
                       </button>
+                      )}
                     </div>
                     <div>
-                    <button
+                    {showButtons && recordingState[index] === "stoppedRecording" && (
+                      <button
                         className="submit-button"
                         onClick={() => handleQuestionSubmit(index)}>
-                      Submit
-                    </button>
+                        Submit
+                      </button>
+                    )}
                     </div>
                     {submittedQuestions[index] && (
                       <div className="output-box" style={{ height: "auto" }}>
                         <div className="feedback">Feedback:</div>
-                        {chatbotResponses[index]
+                        {chatbotResponses[index] !== undefined
                           ? chatbotResponses[index]
                               .split("*")
                               .filter((sentence) => sentence.trim() !== "")
@@ -294,6 +375,14 @@ function App() {
                                 </div>
                               ))
                           : "Loading..."}
+                        <div style={{ textAlign: "center" }}>
+                          <button 
+                            className="answer-again-button"
+                            onClick={() => handleAnswerAgain(index)}
+                          >
+                            Answer Again
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
