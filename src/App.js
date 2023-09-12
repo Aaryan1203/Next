@@ -238,6 +238,7 @@ function App() {
             <div className="output1-loading">Generating...</div>
           ) : (
             <div className="output1-questions">
+              {practiceMode && (
               <div className="response-instructions">
                 Time to practice! Feel free to answer whichever questions you 
                 want in any order you want. For each question, simply click the 
@@ -248,22 +249,21 @@ function App() {
                 and practice these questions as many times as you want; simply click
                 the "Answer Again" button!
               </div>
+              )}
               {practiceMode ? (
                 selectedQuestions.map((question, index) => (
                   <div key={index} className="question-block">
                     <div className="question-text">{`${
                       index + 1
                     }. ${question}`}</div>
+                    {recordingStarted[index] && (
                     <input
                       className="answer-container"
                       type="text"
                       value={answers[index]?.userInput || ""}
                       onChange={handleInputChangeForAnswer(index)}
-                      placeholder="Type answer"
-                    />{" "}
-                    <button onClick={() => handleQuestionSubmit(index)}>
-                      Submit
-                    </button>
+                    />
+                    )}
                     <div>
                       <button
                         className="start-stop-recording-button"
@@ -273,6 +273,13 @@ function App() {
                           ? "Stop Recording"
                           : "Start Recording"}
                       </button>
+                    </div>
+                    <div>
+                    <button
+                        className="submit-button"
+                        onClick={() => handleQuestionSubmit(index)}>
+                      Submit
+                    </button>
                     </div>
                     {submittedQuestions[index] && (
                       <div className="output-box" style={{ height: "auto" }}>
