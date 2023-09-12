@@ -21,20 +21,14 @@ function App() {
   const [regenerateCounter, setRegenerateCounter] = useState(0);
   const [isLoading1, setIsLoading1] = useState(false);
   const [recognitionObjects, setRecognitionObjects] = useState({});
-  const [recordingStates, setRecordingStates] = useState({});
-  const [displayAnswerContainer, setDisplayAnswerContainer] = useState({});
 
   const handleSpeechRecognition = (index) => {
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = true;
 
     recognition.onresult = function (event) {
-      let transcript =
+      const transcript =
         event.results[event.results.length - 1][0].transcript.trim();
-
-        const previousContent = answers[index]?.userInput || "";
-
-        transcript = previousContent ? `${previousContent} ${transcript}` : transcript;
 
       setAnswers({
         ...answers,
@@ -62,12 +56,11 @@ function App() {
   };
 
   const handleInputChangeForAnswer = (index) => (e) => {
-    const newText = e.target.value;
     setAnswers({
       ...answers,
       [index]: {
         ...answers[index],
-        userInput: newText,
+        userInput: e.target.value,
       },
     });
   };
@@ -151,6 +144,27 @@ function App() {
     }
   };
 
+  const toggleRecording = (index) => {
+    if (recordingStarted[index]) {
+      const recognition = recognitionObjects[index];
+      recognition && recognition.stop();
+      setRecordingStarted({
+        ...recordingStarted,
+        [index]: false,
+      });
+    } else {
+      const recognition = handleSpeechRecognition(index);
+      setRecognitionObjects({
+        ...recognitionObjects,
+        [index]: recognition,
+      });
+      setRecordingStarted({
+        ...recordingStarted,
+        [index]: true,
+      });
+    }
+  };
+
   const openPopup = () => {
     setPopupOpened(true);
   };
@@ -158,33 +172,6 @@ function App() {
   const closePopup = () => {
     setPopupOpened(false);
   };
-
-  const handleStartStopRecording = (index) => {
-    if (!recordingStarted[index]) {
-      const recognition = handleSpeechRecognition(index);
-      setRecognitionObjects({
-        ... recognitionObjects,
-        [index]: recognition,
-      });
-
-      setRecordingStarted({
-        ... recordingStarted,
-        [index]: true,
-      });
-    } else {
-      const recognition = recognitionObjects[index];
-      recognition && recognition.stop();
-      setRecordingStates({
-        ... recordingStates,
-        [index]: true,
-      });
-    }
-
-    setDisplayAnswerContainer({
-      ... displayAnswerContainer,
-      [index]: true,
-    });
-  }
 
   return (
     <div className="App">
@@ -251,7 +238,6 @@ function App() {
             <div className="output1-loading">Generating...</div>
           ) : (
             <div className="output1-questions">
-              {practiceMode && (
               <div className="response-instructions">
                 Time to practice! Feel free to answer whichever questions you 
                 want in any order you want. For each question, simply click the 
@@ -262,42 +248,31 @@ function App() {
                 and practice these questions as many times as you want; simply click
                 the "Answer Again" button!
               </div>
-              )}
               {practiceMode ? (
                 selectedQuestions.map((question, index) => (
                   <div key={index} className="question-block">
                     <div className="question-text">{`${
                       index + 1
                     }. ${question}`}</div>
-                    {recordingStarted[index] &&(
                     <input
                       className="answer-container"
                       type="text"
                       value={answers[index]?.userInput || ""}
                       onChange={handleInputChangeForAnswer(index)}
-                      style={{ 
-                        height: "auto", 
-                        display: displayAnswerContainer[index] ? "block" : "none",
-                    }}
-                    />
-                    )}
+                      placeholder="Type answer"
+                    />{" "}
+                    <button onClick={() => handleQuestionSubmit(index)}>
+                      Submit
+                    </button>
                     <div>
                       <button
                         className="start-stop-recording-button"
-                        onClick={() => handleStartStopRecording(index)}
-                        disabled={recordingStates[index]}
+                        onClick={() => toggleRecording(index)}
                       >
                         {recordingStarted[index]
                           ? "Stop Recording"
                           : "Start Recording"}
                       </button>
-                    </div>
-                    <div>
-                    <button
-                        className="submit-button"
-                        onClick={() => handleQuestionSubmit(index)}>
-                      Submit
-                    </button>
                     </div>
                     {submittedQuestions[index] && (
                       <div className="output-box" style={{ height: "auto" }}>
