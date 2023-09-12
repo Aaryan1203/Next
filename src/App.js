@@ -243,7 +243,7 @@ function App() {
 
   const openPopup = () => {
     setPopupOpened(true);
-  };
+  }; 
 
   const closePopup = () => {
     setPopupOpened(false);
