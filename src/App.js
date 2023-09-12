@@ -21,6 +21,7 @@ function App() {
   const [regenerateCounter, setRegenerateCounter] = useState(0);
   const [isLoading1, setIsLoading1] = useState(false);
   const [recognitionObjects, setRecognitionObjects] = useState({});
+  const [recordingState, setRecordingState] = useState("haveNotStarted");
 
   const handleSpeechRecognition = (index) => {
     const recognition = new window.webkitSpeechRecognition();
@@ -145,23 +146,21 @@ function App() {
   };
 
   const toggleRecording = (index) => {
-    if (recordingStarted[index]) {
-      const recognition = recognitionObjects[index];
-      recognition && recognition.stop();
-      setRecordingStarted({
-        ...recordingStarted,
-        [index]: false,
-      });
-    } else {
+    if (recordingStarted[index] === undefined || recordingStarted[index] === "stoppedRecording") {
       const recognition = handleSpeechRecognition(index);
       setRecognitionObjects({
-        ...recognitionObjects,
+        ... recognitionObjects,
         [index]: recognition,
       });
+      
       setRecordingStarted({
-        ...recordingStarted,
-        [index]: true,
-      });
+        ...recognitionObjects,
+        [index]: "recording"
+      })
+    } else if (recordingState === "recording") {
+      const recognition = recognitionObjects[index];
+      recognition && recognition.stop();
+      setRecordingState("stoppedRecording");
     }
   };
 
@@ -268,16 +267,20 @@ function App() {
                       <button
                         className="start-stop-recording-button"
                         onClick={() => toggleRecording(index)}
+                        disabled={recordingState === "submitted"}
                       >
-                        {recordingStarted[index]
+                        {recordingState === "haveNotStarted"
+                          ? "Start Recording"
+                          : recordingState === "recording"
                           ? "Stop Recording"
-                          : "Start Recording"}
+                          : "Stop Recording"}
                       </button>
                     </div>
                     <div>
                     <button
                         className="submit-button"
-                        onClick={() => handleQuestionSubmit(index)}>
+                        onClick={() => handleQuestionSubmit(index)}
+                        disabled={recordingState != "stoppedRecording"}>
                       Submit
                     </button>
                     </div>
