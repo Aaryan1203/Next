@@ -426,7 +426,7 @@ function App() {
       </div>
       <div className="descriptions">
         <div className="description description-1">
-          <div className="description-title">Free Recorder and Suggester</div>
+          <div className="description-title">Free Recorder</div>
           <div className="description-content">
             Our web application doesn't require purchases or downloads in order
             to record your interview question response, commend the strong
