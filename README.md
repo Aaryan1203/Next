@@ -10,6 +10,10 @@ This web application aims to streamline the interview preparation process for st
 - **Real-time Feedback**: Uses OpenAI’s API to analyze verbal responses, providing instant, actionable feedback.
 - **Interactive UI**: Allows users to select, practice, and review feedback for each question dynamically.
 
+## Get Started
+
+Ready to practice your interview skills? Visit [Next - Interactive Interview Simulator](https://www.next-interview-prep.org/) and start preparing for your upcoming interviews effectively and interactively!
+
 ## Tech Stack
 - JavaScript
 - Node.js
@@ -29,3 +33,9 @@ This web application aims to streamline the interview preparation process for st
 3. **Start Practicing**: Once you've selected your questions, hit “Start Practicing!” to begin the interactive simulation.
 4. **Record & Submit**: Utilize the “Start Recording” and “Stop Recording” buttons to verbally answer questions. Submit your answers and receive immediate feedback.
 5. **Iterative Improvement**: Use the provided feedback to refine your answers, and practice again by clicking “Answer Again”.
+
+## Acknowledgements
+
+We want to express our gratitude to the following organizations and resources that made this application possible:
+- **OpenAI**: For providing an API that allows us to generate real-time feedback on users’ verbal responses.
+- **Web Speech API**: For enabling the speech-to-text functionality that allows users to answer questions verbally.
