@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Next
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This web application aims to streamline the interview preparation process for students and job-seekers, providing an interactive platform to practice answering interview questions verbally. It leverages modern web technologies and the OpenAI API to create a comprehensive and user-friendly interview simulator.
 
-In the project directory, you can run:
+### Key Features:
+- **Dynamic Question Generation**: Automatically generates interview questions based on user inputs like position and type.
+- **Speech-to-Text**: Integrates Web Speech API, enabling users to respond verbally to questions.
+- **Real-time Feedback**: Uses OpenAI’s API to analyze verbal responses, providing instant, actionable feedback.
+- **Interactive UI**: Allows users to select, practice, and review feedback for each question dynamically.
 
-### `npm start`
+## Tech Stack
+- JavaScript
+- Node.js
+- Web Speech API
+- OpenAI API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Application Flow
+1. **Question Generation**: Users input desired position, question type(s), and number of questions. The system generates pertinent interview questions.
+2. **Question Selection**: Users select from the generated questions for practice.
+3. **Verbal Practice**: Users articulate their answers verbally using speech-to-text functionality.
+4. **Instant Feedback**: Upon submission, the OpenAI API provides real-time, constructive feedback based on the user's response.
+5. **Iterative Practice**: Users can adjust their answers based on feedback and practice as many times as desired.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Using the App
+1. **Define Practice Criteria**: Enter the position, type(s) of questions, and the number of questions you’d like to generate.
+2. **Generate Questions**: Click “Generate” to produce questions for selection and choose the ones you’d like to practice.
+3. **Start Practicing**: Once you've selected your questions, hit “Start Practicing!” to begin the interactive simulation.
+4. **Record & Submit**: Utilize the “Start Recording” and “Stop Recording” buttons to verbally answer questions. Submit your answers and receive immediate feedback.
+5. **Iterative Improvement**: Use the provided feedback to refine your answers, and practice again by clicking “Answer Again”.
